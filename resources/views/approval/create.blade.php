@@ -3,6 +3,9 @@
 @section('title', 'Tambah Data Approval')
 
 @section('content')
+
+
+
     <h4 class="fw-bold py-3 mb-4">
         <span class="text-muted fw-light">Internship / <a class="text-decoration-none text-muted fw-light"
                 href="{{ route('approval.index') }}">Approval</a> /</span>
@@ -17,41 +20,23 @@
                     <form action="{{ route('approver.store') }}" method="POST" >
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nama</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                value="{{ old('name') }}" required>
-                            @error('name')
+                            <label for="judul_approval" class="form-label">Judul approval</label>
+                            <input type="text" class="form-control" id="judul_approval" judul_approval="judul_approval"
+                                value="{{ old('judul_approval') }}" required>
+                            @error('judul_approval')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                value="{{ old('email') }}" required>
-                            @error('email')
+                            <label for="dokumen" class="form-label">dokumen</label>
+                            <input type="file" class="form-control" id="dokumen" name="dokumen"
+                                value="{{ old('dokumen') }}" required>
+                            @error('dokumen')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                value="{{ old('password') }}" required>
-                            @error('password')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="role" class="form-label">Divisi</label>
-                            <select class="form-select" id="role" name="role" aria-label="role"
-                                value="{{ old('role') }}" required>
-                                @foreach ($role as $data)
-                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('role')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
+                        
+                        
 
 
                         <div class="mb-3">
@@ -76,7 +61,7 @@
 
 
                         <div class="d-flex justify-content-end mt-2">
-                            <button class="btn btn-primary" type="submit">Simpan</button>
+                            <button class="btn btn-primary" type="submit">Submit</button>
                             <a href="{{ route('users.index') }}" class="btn btn-danger ms-3">Kembali</a>
                         </div>
                     </form>
@@ -123,3 +108,5 @@
 
 
 </script>
+
+
