@@ -66,6 +66,11 @@
                                 <div>Rekap Absensi</div>
                             </a>
                         </li>
+                        <li class="menu-item {{ Route::is('approval.*') ? 'active' : '' }}">
+                            <a href="{{ route('approval.index') }}" class="menu-link">
+                                <div>Approval</div>
+                            </a>
+                        </li>
                     @elseif (Auth::user()->role === 'HRD')
                         <li class="menu-item {{ Route::is('intern.*') ? 'active' : '' }}">
                             <a href="{{ route('intern.index') }}" class="menu-link active ">

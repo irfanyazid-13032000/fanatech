@@ -2,14 +2,15 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\MagangController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\FillPDFController;
-use App\Http\Controllers\PdfController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ApprovalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,3 +60,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 Route::get('/register', [AuthController::class, 'register'])->name('register')->middleware('guest');
 Route::post('/register', [AuthController::class, 'store'])->name('register-post')->middleware('guest');
+
+
+Route::get('/approval', [ApprovalController::class, 'index'])->name('approval.index')->middleware('auth');
+Route::get('/approver/{i}', [ApprovalController::class, 'approver'])->name('approver.all')->middleware('auth');
+Route::post('/approver-store', [ApprovalController::class, 'store'])->name('approver.store')->middleware('auth');
