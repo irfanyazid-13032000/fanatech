@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Approval;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApprovalController extends Controller
 {
@@ -35,7 +37,37 @@ class ApprovalController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->input('approver')); 
+
+        Approval::create([
+            'title' => $request->judul_approval,
+            'comment' => $request->comment,
+            'level' => $request->level_approval,
+            'document' => 'tidak ada.doc',
+        ]);
+
+        $latestApproval = Approval::latest()->first();
+
+
+        foreach ($request->approver as $key => $value) {
+            DB::table('approver_approvals')->insert([
+                'approval_id' => $latestApproval->id,
+                'level_approval' => $key+1,
+                'approver' => $value,
+                'comment' => 'tidak ada',
+                'created_at' => now(),
+            ]);
+        }
+
+        DB::table('giliran_approves')->insert([
+            'approval_id' => $latestApproval->id,
+            'approver' => $request->approver[0],
+            'created_at' => now(),
+        ]);
+        
+
+
+
+        dd($request); 
     }
 
     /**

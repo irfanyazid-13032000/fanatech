@@ -17,13 +17,20 @@
             <div class="card mb-4">
                 <h5 class="card-header">Tambah Data Approval</h5>
                 <div class="card-body">
-                    <form action="{{ route('approver.store') }}" method="POST" >
+                    <form action="{{ route('approver.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="judul_approval" class="form-label">Judul approval</label>
-                            <input type="text" class="form-control" id="judul_approval" judul_approval="judul_approval"
-                                value="{{ old('judul_approval') }}" required>
+                            <input type="text" name="judul_approval" class="form-control" id="judul_approval" value="{{ old('judul_approval') }}" required>
                             @error('judul_approval')
+                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="comment" class="form-label">Comment</label>
+                            <input type="text" class="form-control" id="comment" name="comment"
+                                value="{{ old('comment') }}" required>
+                            @error('comment')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
