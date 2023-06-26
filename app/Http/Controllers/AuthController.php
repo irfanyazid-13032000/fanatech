@@ -30,6 +30,11 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
 
+            $user = Auth::user();
+            $userID = $user->id;
+            $request->session()->put('user_id', $userID);
+
+
             return redirect()->intended('/');
         }
 

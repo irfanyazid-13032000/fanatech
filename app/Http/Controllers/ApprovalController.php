@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\User;
 use App\Models\Approval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,12 +17,14 @@ class ApprovalController extends Controller
     {
         $role = Role::all();
         return view('approval.create',compact('role'));
+        
     }
 
     public function approver($i)
     {
+        $approvers = User::get();
         
-        return view('approval.approver',compact('i'));
+        return view('approval.approver',compact('i','approvers'));
     }
 
     /**
@@ -67,7 +70,7 @@ class ApprovalController extends Controller
 
 
 
-        dd($request); 
+       return view('approval.submitted-approval');
     }
 
     /**

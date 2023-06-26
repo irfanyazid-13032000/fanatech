@@ -5,6 +5,7 @@
 @section('content')
 
 
+{{ dd(session()->all()) }}
 
     <h4 class="fw-bold py-3 mb-4">
         <span class="text-muted fw-light">Internship / <a class="text-decoration-none text-muted fw-light"

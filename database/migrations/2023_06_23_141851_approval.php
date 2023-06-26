@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('level');
             $table->string('comment');
+            $table->string('submitter');
             $table->string('status')->default('belum');
             $table->rememberToken();
             $table->timestamps();

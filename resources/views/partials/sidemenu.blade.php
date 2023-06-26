@@ -87,6 +87,11 @@
                                 <div>Rekap Absensi</div>
                             </a>
                         </li>
+                        <li class="menu-item {{ Route::is('approval.*') ? 'active' : '' }}">
+                            <a href="{{ route('approval.index') }}" class="menu-link">
+                                <div>Approval</div>
+                            </a>
+                        </li>
                     @else
                         <li class="menu-item">
                             <a href="{{ route('absensi.show', Auth::user()->email) }}" class="menu-link">
