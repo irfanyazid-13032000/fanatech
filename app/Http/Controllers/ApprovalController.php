@@ -16,8 +16,6 @@ class ApprovalController extends Controller
      */
     public function index()
     {
-        $role = Role::all();
-        // return view('approval.create',compact('role'));
         return view('approval.submitted-approval');
         
     }
@@ -46,7 +44,7 @@ class ApprovalController extends Controller
     public function approval()
     {
 
-        $approvals = Approval::get();
+        $approvals = Approval::where('submitter',session('user_id'))->get();
         return DataTables::of($approvals)->toJson();
 
     }

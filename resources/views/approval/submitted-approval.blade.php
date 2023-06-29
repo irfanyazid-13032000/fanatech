@@ -2,9 +2,9 @@
 @section('title', 'submitted approval')
 @section('content')
 
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Internship /</span> Data User</h4>
+    <h4 class="fw-bold py-3 mb-4">Data Approval</h4>
     <div class="card">
-        <h5 class="card-header">Approval yang sudah di Submit</h5>
+        <h5 class="card-header">Approval yang sudah di Submit oleh <span class="badge bg-success">{{ Auth::user()->name }}</span></h5>
         <div class="d-flex justify-content-start ms-4">
             <a href="{{ route ('users.create') }}" class="btn btn-primary">Tambah Approval</a>
         </div>
