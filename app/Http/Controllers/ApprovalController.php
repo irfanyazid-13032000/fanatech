@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Approval;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
 class ApprovalController extends Controller
@@ -16,7 +17,8 @@ class ApprovalController extends Controller
     public function index()
     {
         $role = Role::all();
-        return view('approval.create',compact('role'));
+        // return view('approval.create',compact('role'));
+        return view('approval.submitted-approval');
         
     }
 
@@ -26,6 +28,29 @@ class ApprovalController extends Controller
         
         return view('approval.approver',compact('i','approvers'));
     }
+
+    public function approver_approval($id)
+    {
+        $approval = Approval::where('id',$id)->get()->first();
+
+        $approvers = DB::table('approver_approvals')
+            ->join('users', 'users.id', '=', 'approver_approvals.approver')
+            ->select('approver_approvals.*', 'users.name')
+            ->where('approval_id', $id)
+            ->get();
+    
+        return view('approval.approver-approval', compact('approvers','approval'));
+    }
+    
+
+    public function approval()
+    {
+
+        $approvals = Approval::get();
+        return DataTables::of($approvals)->toJson();
+
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -46,6 +71,7 @@ class ApprovalController extends Controller
             'comment' => $request->comment,
             'level' => $request->level_approval,
             'document' => 'tidak ada.doc',
+            'submitter' => session('user_id')
         ]);
 
         $latestApproval = Approval::latest()->first();
@@ -102,6 +128,6 @@ class ApprovalController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return $id;
     }
 }
