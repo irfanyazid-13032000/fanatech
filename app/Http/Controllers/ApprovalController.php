@@ -36,8 +36,10 @@ class ApprovalController extends Controller
             ->select('approver_approvals.*', 'users.name')
             ->where('approval_id', $id)
             ->get();
+        
+        $submitter = User::where('id',$approval->submitter)->get()->first();
     
-        return view('approval.approver-approval', compact('approvers','approval'));
+        return view('approval.approver-approval', compact('approvers','approval','submitter'));
     }
     
 
@@ -49,13 +51,48 @@ class ApprovalController extends Controller
 
     }
 
+    public function responsibility()
+    {
+        // method ini adalah, ketika user lain mengajukan dokumen, lalu kita sebagai orang yang harus mengecek dan meng approve nya
+        $responsibilities = DB::table('approver_approvals')
+            ->join('approvals', 'approvals.id', '=', 'approver_approvals.approval_id')
+            ->where('approver_approvals.approver', session('user_id'))
+            ->get();
+
+
+        return view('approval.responsibility');
+    }
+
+    public function responsibilityData()
+    {
+        $responsibilities = DB::table('approver_approvals')
+            ->join('approvals', 'approvals.id', '=', 'approver_approvals.approval_id')
+            ->where('approver_approvals.approver', session('user_id'))
+            ->get();
+
+        return DataTables::of($responsibilities)->toJson();
+    }
+
+    public function lihatApproval($id)
+    {
+
+        $approval = Approval::where('id',$id)->get()->first();
+
+
+        $giliranApprover = DB::table('giliran_approves')->where('approval_id',$id)->get()->first();
+        $giliranMu = ($giliranApprover->approver == session('user_id')) ? true : false;
+
+        return view('approval.lihat-approval',compact('approval','giliranMu'));
+        // return $approval;
+    }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('approval.create');
     }
 
     /**
@@ -126,6 +163,23 @@ class ApprovalController extends Controller
      */
     public function destroy(string $id)
     {
-        return $id;
+        try {
+        
+            $user = Approval::find($id);
+            
+            if (!$user) {
+                return response()->json(['message' => 'Data tidak ditemukan'], 404);
+            }
+            
+            $user->delete();
+            
+            return redirect('/approval');
+
+            
+        } catch (\Exception $e) {
+            // Tangani kesalahan jika terjadi
+            return response()->json(['message' => 'Terjadi kesalahan saat menghapus data'], 500);
+        }
     }
+
 }

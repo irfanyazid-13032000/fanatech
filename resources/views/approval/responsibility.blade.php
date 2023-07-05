@@ -1,32 +1,23 @@
 @extends('layouts.app')
-@section('title', 'submitted approval')
+@section('title', 'approver approval')
 @section('content')
 
-    <h4 class="fw-bold py-3 mb-4">Data Approval</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Data Approval yang dikirimkan ke kamu<span class="badge bg-danger"></span></h4>
     <div class="card">
-        <h5 class="card-header">Approval yang sudah di Submit oleh <span class="badge bg-success">{{ Auth::user()->name }}</span></h5>
-        <div class="d-flex justify-content-start ms-4">
-            <a href="{{ route ('create.approval') }}" class="btn btn-primary">Tambah Approval</a>
-        </div>
-        @if (Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
-    @endif
+        <h5 class="card-header">Responsibilities dari user yang sudah submit ke kamu (<span class="badge bg-success">{{ Auth::user()->name }}</span>)</h5>
         <div class="table-responsive text-nowrap p-4">
             <table class="table table-hover" id="table">
                 <thead>
                     <tr class="text-center">
-                        <th>No</th>
-                        <th>dokumen</th>
-                        <th>judul</th>
-                        <th>level</th>
-                        <th>komen</th>
-                        <th>Aksi</th>
+                        <th>Judul</th>
+                        <th>Kamu Approver ke</th>
+                        <th>Keseluruhan Approver</th>
+                        <th>Comment</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0" id="table">
-                   
+                 
                 </tbody>
             </table>
         </div>
@@ -44,11 +35,10 @@
     $(document).ready(function() {
         $('#table').DataTable({
             serverSide: true,
-            ajax: "{{ route('submitted.approval.data') }}",
+            ajax: "{{ route('responsibility.data') }}",
             columns: [
-                { data: 'id', name: 'id' },
-                { data: 'document', name: 'document' },
                 { data: 'title', name: 'title' },
+                { data: 'level_approval', name: 'level_approval' },
                 { data: 'level', name: 'level' },
                 { data: 'comment', name: 'comment' },
                 { 
@@ -56,10 +46,10 @@
                     name: 'halo',
                     render: function(data, type, row, meta) {
 
-                        let cancelButton = '<a href="/delete-approval/' + row.id + '" class="btn btn-danger">cancel</a> '
-                        let approverButton = '<a href="/approver-approval/' + row.id + '" class="btn btn-primary">approver</a>'
+                        let lihatApproval = '<a href="/lihat-approval/' + row.id + '" class="btn btn-success">lihat Approval</a> '
+                        let lihatApprover = '<a href="/approver-approval/' + row.id + '" class="btn btn-primary">lihat Approver</a>'
 
-                        return cancelButton+approverButton
+                        return lihatApproval+lihatApprover
                         
                     }
 

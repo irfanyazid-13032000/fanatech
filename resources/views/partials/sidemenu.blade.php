@@ -39,36 +39,16 @@
                                 <div>User Management</div>
                             </a>
                         </li>
-                        {{-- <li class="menu-item">
-                        <a href="{{ route('intern.index') }}" class="menu-link active ">
-                            <div>Data Anggota Magang</div>
-                        </a>
-                    </li> --}}
-                        <li class="menu-item {{ Route::is('divisi.*') ? 'active' : '' }}">
-                            <a href="{{ route('divisi.index') }}" class="menu-link">
-                                <div>Master Divisi</div>
-                            </a>
-                        </li>
-
-                        <li class="menu-item {{ Route::is('role.*') ? 'active' : '' }}">
-                            <a href="{{ route('role.index') }}" class="menu-link">
-                                <div>Master Role</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Route::is('intern.*') ? 'active' : '' }}">
-                            <a href="{{ route('intern.index') }}" class="menu-link active ">
-                                <div>Data Anggota Magang</div>
-                            </a>
-                        </li>
                     
-                        <li class="menu-item {{ Route::is('rekap.*') ? 'active' : '' }}">
-                            <a href="{{ route('rekap.absensi') }}" class="menu-link">
-                                <div>Rekap Absensi</div>
-                            </a>
-                        </li>
+                      
                         <li class="menu-item {{ Route::is('approval.*') ? 'active' : '' }}">
                             <a href="{{ route('approval.index') }}" class="menu-link">
                                 <div>Approval</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('responsibility.*') ? 'active' : '' }}">
+                            <a href="{{ route('responsibility.index') }}" class="menu-link">
+                                <div>Tanggung jawabmu</div>
                             </a>
                         </li>
                     @elseif (Auth::user()->role === 'HRD')
@@ -90,6 +70,11 @@
                         <li class="menu-item {{ Route::is('approval.*') ? 'active' : '' }}">
                             <a href="{{ route('approval.index') }}" class="menu-link">
                                 <div>Approval</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('responsibility.*') ? 'active' : '' }}">
+                            <a href="{{ route('responsibility.index') }}" class="menu-link">
+                                <div>Tanggung jawabmu</div>
                             </a>
                         </li>
                     @else

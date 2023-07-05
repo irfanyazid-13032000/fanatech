@@ -4,12 +4,11 @@
 
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Data Approver dari Approval <span class="badge bg-danger">{{$approval->title}}</span></h4>
     <div class="card">
-        <h5 class="card-header">Approver dari Approval yang sudah <span class="badge bg-success">{{ Auth::user()->name }}</span> submit</h5>
+        <h5 class="card-header">Approver dari Approval yang sudah disubmit <span class="badge bg-success">{{ $submitter->name }}</span></h5>
         <div class="table-responsive text-nowrap p-4">
             <table class="table table-hover" id="table">
                 <thead>
                     <tr class="text-center">
-                        <th>No</th>
                         <th>Level Approval</th>
                         <th>Approver</th>
                         <th>Comment</th>
@@ -20,7 +19,6 @@
                 <tbody class="table-border-bottom-0" id="table">
                   @foreach ($approvers as $approver)
                   <tr class="text-center">
-                       <th>{{$approver->id}}</th>
                        <th>{{$approver->level_approval}}</th>
                        <th>{{$approver->name}}</th>
                        <th>{{$approver->comment}}</th>
