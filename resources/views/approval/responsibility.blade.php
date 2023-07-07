@@ -48,8 +48,8 @@
                     name: 'halo',
                     render: function(data, type, row, meta) {
 
-                        let lihatApproval = '<a href="/lihat-approval/' + row.id + '" class="btn btn-success">lihat Approval</a> '
-                        let lihatApprover = '<a href="/approver-approval/' + row.id + '" class="btn btn-primary">lihat Approver</a>'
+                        let lihatApproval = '<a href="/lihat-approval/' + row.approval_id + '" class="btn btn-success">lihat Approval</a> '
+                        let lihatApprover = '<a href="/approver-approval/' + row.approval_id + '" class="btn btn-primary">lihat Approver</a>'
 
                         return lihatApproval+lihatApprover
                         
