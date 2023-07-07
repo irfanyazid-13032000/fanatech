@@ -67,11 +67,29 @@ class ApprovalController extends Controller
     {
         $responsibilities = DB::table('approver_approvals')
             ->join('approvals', 'approvals.id', '=', 'approver_approvals.approval_id')
+            ->join('giliran_approves', 'giliran_approves.approval_id', '=', 'approvals.id')
+            ->join('users', 'users.id', '=', 'giliran_approves.approver')
             ->where('approver_approvals.approver', session('user_id'))
+            ->select(
+                'approver_approvals.id',
+                'approver_approvals.approval_id',
+                'approver_approvals.level_approval',
+                'users.name as giliran_approve', // Mengganti nama kolom "approver" menjadi "giliran_approve"
+                'approver_approvals.comment',
+                'approver_approvals.status',
+                'approver_approvals.remember_token',
+                'approver_approvals.created_at',
+                'approver_approvals.updated_at',
+                'approvals.document',
+                'approvals.title',
+                'approvals.level',
+                'approvals.submitter'
+            )
             ->get();
-
+    
         return DataTables::of($responsibilities)->toJson();
     }
+    
 
     public function lihatApproval($id)
     {
