@@ -68,14 +68,15 @@ class ApprovalController extends Controller
         $responsibilities = DB::table('approver_approvals')
             ->join('approvals', 'approvals.id', '=', 'approver_approvals.approval_id')
             ->join('giliran_approves', 'giliran_approves.approval_id', '=', 'approvals.id')
+            ->join('users as submitter', 'submitter.id', '=', 'approvals.submitter') // Join ke tabel users dengan alias submitter
             ->join('users', 'users.id', '=', 'giliran_approves.approver')
             ->where('approver_approvals.approver', session('user_id'))
             ->select(
                 'approver_approvals.id',
                 'approver_approvals.approval_id',
                 'approver_approvals.level_approval',
-                'users.name as giliran_approve', // Mengganti nama kolom "approver" menjadi "giliran_approve"
-                'approver_approvals.comment',
+                'users.name as giliran_approve',
+                'approvals.comment',
                 'approver_approvals.status',
                 'approver_approvals.remember_token',
                 'approver_approvals.created_at',
@@ -83,12 +84,13 @@ class ApprovalController extends Controller
                 'approvals.document',
                 'approvals.title',
                 'approvals.level',
-                'approvals.submitter'
+                'submitter.name as submitter_name' // Menggunakan alias submitter_name untuk kolom users.name
             )
             ->get();
     
         return DataTables::of($responsibilities)->toJson();
     }
+    
     
 
     public function lihatApproval($id)
@@ -103,6 +105,33 @@ class ApprovalController extends Controller
         return view('approval.lihat-approval',compact('approval','giliranMu'));
         // return $approval;
     }
+
+    public function approveApproval(Request $request)
+    {
+        $approval = DB::table('approver_approvals')
+            ->where('approval_id', $request->id)
+            ->where('approver', session('user_id'))
+            ->get()
+            ->first();
+    
+        if ($approval) {
+            // Mengubah nilai kolom comment
+    
+            // Simpan perubahan pada $approval ke dalam database
+            DB::table('approver_approvals')
+                ->where('id', $approval->id)
+                ->update([
+                    'comment' => $request->comment,
+                    'status' => 'approve',
+                ]);
+    
+            return redirect()->route('lihat.approval',['id'=>$request->id]);
+        }
+    
+        return null; // Jika data tidak ditemukan
+    }
+    
+
 
 
     /**

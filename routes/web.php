@@ -74,3 +74,5 @@ Route::get('/lihat-approval/{id}', [ApprovalController::class, 'lihatApproval'])
 
 Route::get('/responsibility', [ApprovalController::class, 'responsibility'])->name('responsibility.index')->middleware('auth');
 Route::get('/responsibility-data', [ApprovalController::class, 'responsibilityData'])->name('responsibility.data')->middleware('auth');
+
+Route::post('/approve-approval', [ApprovalController::class, 'approveApproval'])->name('approve.approval')->middleware('auth');

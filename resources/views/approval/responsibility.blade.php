@@ -13,7 +13,8 @@
                         <th>Kamu Approver ke</th>
                         <th>Keseluruhan Approver</th>
                         <th>Comment</th>
-                        <th>Giliran Approve</th>
+                        <th>Giliran</th>
+                        <th>Submitter</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -43,6 +44,7 @@
                 { data: 'level', name: 'level' },
                 { data: 'comment', name: 'comment' },
                 { data: 'giliran_approve', name: 'giliran_approve' },
+                { data: 'submitter_name', name: 'submitter_name' },
                 { 
                     data: 'halo',
                     name: 'halo',
