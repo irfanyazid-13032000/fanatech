@@ -113,6 +113,44 @@ class ApprovalController extends Controller
             ->where('approver', session('user_id'))
             ->get()
             ->first();
+
+        $approverTerbesar = DB::table('approver_approvals')
+            ->where('approval_id', $request->id)
+            ->get()
+            ->sortByDesc('id')
+            ->first();
+
+        // jika approver nya ternyata masih ada level lain yang lebih tinggi dari approver yang baru saja approve,
+        // maka giliran approve nya akan di update, naik 1 level
+        if ($approverTerbesar->level_approval > $approval->level_approval) {
+
+            $approverLevelSelanjutnya = DB::table('approver_approvals')
+                    ->where('approval_id', $request->id)
+                    // magic nya ada disini, level approval nya ditambah 1 karena naik satu level
+                    ->where('level_approval', $approval->level_approval+1)
+                    ->get()
+                    ->first();
+
+
+            DB::table('giliran_approves')
+                ->where('approval_id',$request->id)
+                ->update([
+                    'approver' => $approverLevelSelanjutnya->approver,
+                    'updated_at' => now()
+                ]);
+        }
+
+        // jika approver nya tidak ada level lain yang lebih tinggi dari level sekarang, maka dinyatakan approval ini final
+        if ($approverTerbesar->level_approval == $approval->level_approval) {
+            DB::table('approvals')
+                ->where('id',$request->id)
+                ->update([
+                    'status' => 'final',
+                    'updated_at' => now()
+                ]);
+        }
+
+        
     
         if ($approval) {
             // Mengubah nilai kolom comment
@@ -125,7 +163,7 @@ class ApprovalController extends Controller
                     'status' => 'approve',
                 ]);
     
-            return redirect()->route('lihat.approval',['id'=>$request->id]);
+                return redirect()->route('lihat.approval',['id'=>$request->id]);
         }
     
         return null; // Jika data tidak ditemukan

@@ -22,6 +22,7 @@
                         <th>judul</th>
                         <th>level</th>
                         <th>komen</th>
+                        <th>status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -51,6 +52,17 @@
                 { data: 'title', name: 'title' },
                 { data: 'level', name: 'level' },
                 { data: 'comment', name: 'comment' },
+                { 
+                    data:'status',
+                    name:'status',
+                    render: function(data,type,row,meta){
+                        if (row.status == 'final') {
+                            return '<span class="badge bg-success">'+row.status+'</span>'
+                        }else{
+                            return '<span class="badge bg-danger">'+row.status+'</span>'
+                        }
+                    }
+                },
                 { 
                     data: 'halo',
                     name: 'halo',
