@@ -67,6 +67,7 @@ Route::get('/approver/{i}', [ApprovalController::class, 'approver'])->name('appr
 Route::post('/approver-store', [ApprovalController::class, 'store'])->name('approver.store')->middleware('auth');
 Route::get('/submitted-approval-data', [ApprovalController::class, 'approval'])->name('submitted.approval.data')->middleware('auth');
 Route::get('/delete-approval/{id}', [ApprovalController::class, 'destroy'])->name('delete.approval')->middleware('auth');
+Route::get('/submit-approval/{id}', [ApprovalController::class, 'submit'])->name('submit.approval')->middleware('auth');
 Route::get('/create-approval/', [ApprovalController::class, 'create'])->name('create.approval')->middleware('auth');
 Route::get('/approver-approval/{id}', [ApprovalController::class, 'approver_approval'])->name('approver.approval')->middleware('auth');
 Route::get('/lihat-approval/{id}', [ApprovalController::class, 'lihatApproval'])->name('lihat.approval')->middleware('auth');

@@ -51,13 +51,25 @@ class ApprovalController extends Controller
 
     }
 
+    public function submit(string $id)
+    {
+        Approval::where('id',$id)
+        ->update([
+            'status' => 'submit',
+            'updated_at' => now()
+        ]);
+
+        return redirect()->route('approval.index');
+    }
+
     public function responsibility()
     {
         // method ini adalah, ketika user lain mengajukan dokumen, lalu kita sebagai orang yang harus mengecek dan meng approve nya
-        $responsibilities = DB::table('approver_approvals')
-            ->join('approvals', 'approvals.id', '=', 'approver_approvals.approval_id')
-            ->where('approver_approvals.approver', session('user_id'))
-            ->get();
+        // $responsibilities = DB::table('approver_approvals')
+        //     ->join('approvals', 'approvals.id', '=', 'approver_approvals.approval_id')
+        //     ->where('approver_approvals.approver', session('user_id'))
+        //     ->where('approvals.status', 'submit')
+        //     ->get();
 
 
         return view('approval.responsibility');
@@ -66,11 +78,13 @@ class ApprovalController extends Controller
     public function responsibilityData()
     {
         $responsibilities = DB::table('approver_approvals')
+            // ->where('approvals.status', 'submit')
             ->join('approvals', 'approvals.id', '=', 'approver_approvals.approval_id')
             ->join('giliran_approves', 'giliran_approves.approval_id', '=', 'approvals.id')
             ->join('users as submitter', 'submitter.id', '=', 'approvals.submitter') // Join ke tabel users dengan alias submitter
             ->join('users', 'users.id', '=', 'giliran_approves.approver')
             ->where('approver_approvals.approver', session('user_id'))
+            ->where('approvals.status', 'submit')
             ->select(
                 'approver_approvals.id',
                 'approver_approvals.approval_id',
@@ -87,6 +101,7 @@ class ApprovalController extends Controller
                 'submitter.name as submitter_name' // Menggunakan alias submitter_name untuk kolom users.name
             )
             ->get();
+
     
         return DataTables::of($responsibilities)->toJson();
     }
@@ -131,7 +146,7 @@ class ApprovalController extends Controller
                     ->get()
                     ->first();
 
-
+            // giliran approves nya juga di update menjadi approver selanjutnya
             DB::table('giliran_approves')
                 ->where('approval_id',$request->id)
                 ->update([

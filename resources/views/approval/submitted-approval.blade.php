@@ -58,6 +58,8 @@
                     render: function(data,type,row,meta){
                         if (row.status == 'final') {
                             return '<span class="badge bg-success">'+row.status+'</span>'
+                        }else if(row.status == 'submit'){
+                            return '<span class="badge bg-primary">'+row.status+'</span>'
                         }else{
                             return '<span class="badge bg-danger">'+row.status+'</span>'
                         }
@@ -68,10 +70,16 @@
                     name: 'halo',
                     render: function(data, type, row, meta) {
 
-                        let cancelButton = '<a href="/delete-approval/' + row.id + '" class="btn btn-danger">cancel</a> '
+                        let cancelOrSubmit
+                        if (row.status == "belum") {
+                            cancelOrSubmit = '<a href="/submit-approval/' + row.id + '" class="btn btn-success">submit</a> '
+                        }else{
+                            cancelOrSubmit = '<a href="/delete-approval/' + row.id + '" class="btn btn-danger">cancel</a> '
+                        }
+
                         let approverButton = '<a href="/approver-approval/' + row.id + '" class="btn btn-primary">approver</a>'
 
-                        return cancelButton+approverButton
+                        return cancelOrSubmit+approverButton
                         
                     }
 
