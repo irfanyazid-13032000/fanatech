@@ -70,16 +70,24 @@
                     name: 'halo',
                     render: function(data, type, row, meta) {
 
-                        let cancelOrSubmit
+                        let submit = ''
+                        let hapus = ''
+                        let edit = ''
                         if (row.status == "belum") {
-                            cancelOrSubmit = '<a href="/submit-approval/' + row.id + '" class="btn btn-success">submit</a> '
-                        }else{
-                            cancelOrSubmit = '<a href="/delete-approval/' + row.id + '" class="btn btn-danger">cancel</a> '
+                            submit = '<a href="/submit-approval/' + row.id + '" class="btn btn-success">Submit</a> '
+                            edit = '<a href="/edit-approval/' + row.id + '" class="btn btn-info">Edit</a> '
+                            hapus = '<a href="/delete-approval/' + row.id + '" class="btn btn-danger">Delete</a>'
+                            
                         }
 
-                        let approverButton = '<a href="/approver-approval/' + row.id + '" class="btn btn-primary">approver</a>'
+                        let approverButton = '<a href="/approver-approval/' + row.id + '" class="btn btn-primary">approver</a> '
 
-                        return cancelOrSubmit+approverButton
+                       
+
+                        return submit+approverButton+edit+hapus
+
+                        
+
                         
                     }
 
