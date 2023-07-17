@@ -8,6 +8,7 @@ use App\Models\Approval;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ApprovalController extends Controller
 {
@@ -40,6 +41,21 @@ class ApprovalController extends Controller
         $allApprovers = DB::table('users')->get();
         
         return view('approval.approver-edit',compact('i','approvers_approval','allApprovers','approverSelected'));
+    }
+
+    public function approverShow($i,$id)
+    {
+        $approvers_approval = DB::table('approver_approvals')
+                ->where('approval_id',$id)
+                ->join('users','users.id','=','approver_approvals.approver')
+                ->get();
+
+        $approverSelected = $approvers_approval[$i];
+
+                
+        $allApprovers = DB::table('users')->get();
+        
+        return view('approval.approver-show',compact('i','approvers_approval','allApprovers','approverSelected'));
     }
 
     public function approver_approval($id)
@@ -246,7 +262,8 @@ class ApprovalController extends Controller
 
 
 
-       return view('approval.submitted-approval');
+    //    return view('approval.submitted-approval');
+       return redirect()->route('approval.index')->with('success', 'Data approval berhasil ditambahkan.');
     }
 
     /**
@@ -264,16 +281,70 @@ class ApprovalController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $approval = Approval::find($id);
+        // dd($approval);
+        return view('approval.edit',compact('approval'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
+{
+    $validator = Validator::make($request->all(), [
+        'judul_approval' => 'required',
+        'comment' => 'required',
+        'dokumen' => 'required', // Batasan tipe file dan ukuran maksimum
+        'level_approval' => 'required',
+        'approver' => 'required|array',
+        'approver.*' => 'distinct', // Memastikan nilai approver unik di dalam array
+        // tambahkan validasi lainnya sesuai kebutuhan
+    ], [
+        'approver.distinct' => 'Kolom approver tidak boleh memiliki nilai yang sama.',
+    ]);
+
+    // Jika validasi gagal, kembalikan dengan pesan kesalahan
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
     }
+
+    // Mengambil file yang diunggah
+    if ($request->hasFile('dokumen')) {
+        $file = $request->file('dokumen');
+
+        // Menyimpan file ke direktori yang diinginkan (misalnya, dalam folder public)
+        $destinationPath = 'public/dokumen';
+        $filename = $file->getClientOriginalName();
+        $file->storeAs($destinationPath, $filename);
+    }
+
+    $approval = Approval::find($id);
+    $approval->title = $request->input('judul_approval');
+    $approval->comment = $request->input('comment');
+    $approval->document = $filename; // Simpan nama file yang diunggah
+    $approval->level = $request->input('level_approval');
+
+    $approval->save();
+
+    DB::table('approver_approvals')
+        ->where('approval_id', $id)
+        ->delete();
+
+    foreach ($request->input('approver') as $key => $approver) {
+        DB::table('approver_approvals')
+            ->insert([
+                'approval_id' => $id,
+                'level_approval' => $key + 1,
+                'approver' => $approver,
+                'comment' => 'tidak ada'
+            ]);
+    }
+
+    // Kembali ke halaman approval setelah berhasil mengupdate data
+    return redirect()->route('approval.index')->with('success', 'Data approval berhasil diupdate.');
+}
+
+
 
     /**
      * Remove the specified resource from storage.
