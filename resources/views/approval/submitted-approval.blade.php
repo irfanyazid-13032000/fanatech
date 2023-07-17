@@ -76,15 +76,15 @@
                         if (row.status == "belum") {
                             submit = '<a href="/submit-approval/' + row.id + '" class="btn btn-success">Submit</a> '
                             edit = '<a href="/edit-approval/' + row.id + '" class="btn btn-info">Edit</a> '
-                            hapus = '<a href="/delete-approval/' + row.id + '" class="btn btn-danger">Delete</a>'
-                            
+                            hapus = '<a href="/delete-approval/' + row.id + '" class="btn btn-danger">Delete</a> '
                         }
+                        let detail = '<a href="/detail-approval/' + row.id + '" class="btn btn-secondary">Detail</a>'
 
                         let approverButton = '<a href="/approver-approval/' + row.id + '" class="btn btn-primary">approver</a> '
 
                        
 
-                        return submit+approverButton+edit+hapus
+                        return submit+approverButton+edit+hapus+detail
 
                         
 

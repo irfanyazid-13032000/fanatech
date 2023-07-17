@@ -27,6 +27,21 @@ class ApprovalController extends Controller
         return view('approval.approver',compact('i','approvers'));
     }
 
+    public function approverEdit($i,$id)
+    {
+        $approvers_approval = DB::table('approver_approvals')
+                ->where('approval_id',$id)
+                ->join('users','users.id','=','approver_approvals.approver')
+                ->get();
+
+        $approverSelected = $approvers_approval[$i];
+
+                
+        $allApprovers = DB::table('users')->get();
+        
+        return view('approval.approver-edit',compact('i','approvers_approval','allApprovers','approverSelected'));
+    }
+
     public function approver_approval($id)
     {
         $approval = Approval::where('id',$id)->get()->first();
@@ -239,7 +254,9 @@ class ApprovalController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $approval = Approval::find($id);
+        // dd($approval);
+        return view('approval.detail',compact('approval'));
     }
 
     /**
