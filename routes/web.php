@@ -82,3 +82,4 @@ Route::get('/responsibility', [ApprovalController::class, 'responsibility'])->na
 Route::get('/responsibility-data', [ApprovalController::class, 'responsibilityData'])->name('responsibility.data')->middleware('auth');
 
 Route::post('/approve-approval', [ApprovalController::class, 'approveApproval'])->name('approve.approval')->middleware('auth');
+Route::post('/reject-approval', [ApprovalController::class, 'rejectApproval'])->name('reject.approval')->middleware('auth');

@@ -91,10 +91,25 @@ class ApprovalController extends Controller
 
     public function submit(string $id)
     {
+        // return $id;
+        $approval = Approval::find($id);
+
+        // dd($approval);
         Approval::where('id',$id)
         ->update([
             'status' => 'submit',
             'updated_at' => now()
+        ]);
+
+
+
+
+        DB::table('history_approval')->insert([
+            'approval_id' => $id,
+            'actor' => session('user_id'),
+            'status' => 'submit',
+            'comment' => $approval->comment,
+            'created_at' => now(),
         ]);
 
         return redirect()->route('approval.index');
@@ -221,6 +236,41 @@ class ApprovalController extends Controller
     
         return null; // Jika data tidak ditemukan
     }
+
+
+    public function rejectApproval(Request $request)
+    {
+        DB::table('approvals')
+            ->where('id',$request->id)
+            ->update([
+                'status' => 'belum',
+                'updated_at' => now()
+        ]);
+
+        DB::table('giliran_approves')
+            ->where('approval_id',$request->id)
+            ->where('approver',session('user_id'))
+            ->delete();
+
+        DB::table('history_approval')
+            ->insert([
+                'approval_id' => $request->id,
+                'actor' => session('user_id'),
+                'status' => 'reject',
+                'comment' => $request->comment,
+            ]);
+
+    
+
+        DB::table('approver_approvals')
+                ->where('approval_id', $request->id)
+                ->where('approver',session('user_id'))
+                ->update([
+                    'comment' => $request->comment,
+                    'status' => 'reject',
+                ]);
+        return redirect()->route('responsibility.index');
+    }
     
 
 
@@ -268,13 +318,7 @@ class ApprovalController extends Controller
         ]);
 
 
-        DB::table('history_approval')->insert([
-            'approval_id' => $latestApproval->id,
-            'actor' => session('user_id'),
-            'status' => 'submit',
-            'comment' => $request->comment,
-            'created_at' => now(),
-        ]);
+       
         
 
 

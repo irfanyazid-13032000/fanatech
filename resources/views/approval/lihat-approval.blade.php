@@ -76,6 +76,32 @@
     </div>
   </div>
 </div>
+    <!-- modal reject -->
+
+    <!-- Modal -->
+<div class="modal fade" id="modalReject" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="commentModalLabel">Berikan Komentar Reject</h5>
+
+      </div>
+      <div class="modal-body">
+        <!-- Comment form -->
+        <form action="{{route('reject.approval')}}" method="POST">
+            @csrf
+          <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea class="form-control" id="comment" rows="3" name="comment"></textarea>
+            <input type="text" name="id" value="{{$approval->id}}" hidden>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 @endsection
@@ -88,6 +114,10 @@
 <script>
   document.getElementById('approve').addEventListener('click', function() {
     $('#modalApprove').modal('show'); // Show the modal when the button is clicked
+  });
+
+  document.getElementById('reject').addEventListener('click', function() {
+    $('#modalReject').modal('show'); // Show the modal when the button is clicked
   });
 </script>
 </body>
