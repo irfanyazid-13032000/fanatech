@@ -69,8 +69,15 @@ class ApprovalController extends Controller
             ->get();
         
         $submitter = User::where('id',$approval->submitter)->get()->first();
+
+        $histories = DB::table('history_approval')
+            ->join('users','users.id','=','history_approval.actor')
+            ->where('history_approval.approval_id',$id)
+            ->get();
+
+        // dd($histories);
     
-        return view('approval.approver-approval', compact('approvers','approval','submitter'));
+        return view('approval.approver-approval', compact('approvers','approval','submitter','histories'));
     }
     
 
@@ -255,7 +262,17 @@ class ApprovalController extends Controller
 
         DB::table('giliran_approves')->insert([
             'approval_id' => $latestApproval->id,
+            // karena giliran pertama adalah $request->approver[0]
             'approver' => $request->approver[0],
+            'created_at' => now(),
+        ]);
+
+
+        DB::table('history_approval')->insert([
+            'approval_id' => $latestApproval->id,
+            'actor' => session('user_id'),
+            'status' => 'submit',
+            'comment' => $request->comment,
             'created_at' => now(),
         ]);
         

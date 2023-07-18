@@ -30,6 +30,34 @@
             </table>
         </div>
     </div>
+
+
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Data History dari Approval <span class="badge bg-danger">{{$approval->title}}</span></h4>
+    <div class="card">
+        <h5 class="card-header">History dari Approval yang sudah disubmit <span class="badge bg-success">{{ $submitter->name }}</span></h5>
+        <div class="table-responsive text-nowrap p-4">
+            <table class="table table-hover" id="table">
+                <thead>
+                    <tr class="text-center">
+                        <th>Actor</th>
+                        <th>Status</th>
+                        <th>Comment</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0" id="table">
+                  @foreach ($histories as $history)
+                  <tr class="text-center">
+                       <th>{{$history->name}}</th>
+                       <th>{{$history->status}}</th>
+                       <th>{{$history->comment}}</th>
+                       <th>{{$history->created_at}}</th>
+                      </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @push('addon-style')
