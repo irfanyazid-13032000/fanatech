@@ -3,8 +3,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="/" class="app-brand-link">
-            <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" width="60">
-            <span class="menu-text fw-bolder fs-4 ms-2">Lokpro Media</span>
+            <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" width="100">
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -26,31 +25,22 @@
         <!-- Layouts -->
         @if (Auth::user()->role === 'Admin' || Auth::user()->role === 'HRD')
             <li
-                class="menu-item {{ Route::is('users.*') || Route::is('divisi.*') || Route::is('rekap.*') || Route::is('intern.*') || Route::is('role.*') ? 'active open' : '' }}">
+                class="menu-item {{ Route::is('skk.*') || Route::is('divisi.*') || Route::is('rekap.*') || Route::is('intern.*') || Route::is('role.*') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bxs-user-check"></i>
-                    <div data-i18n="Layouts">Management </div>
+                    <div data-i18n="Layouts">Skk </div>
                 </a>
 
                 <ul class="menu-sub">
                     @if (Auth::user()->role === 'Admin')
-                        <li class="menu-item {{ Route::is('users.*') ? 'active' : '' }}">
-                            <a href="{{ route('users.index') }}" class="menu-link active">
-                                <div>User Management</div>
+                        <li class="menu-item {{ Route::is('skk.*') ? 'active' : '' }}">
+                            <a href="{{ route('skk.index') }}" class="menu-link active">
+                                <div>Get SKK</div>
                             </a>
                         </li>
                     
                       
-                        <li class="menu-item {{ Route::is('approval.*') ? 'active' : '' }}">
-                            <a href="{{ route('approval.index') }}" class="menu-link">
-                                <div>Approval</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Route::is('responsibility.*') ? 'active' : '' }}">
-                            <a href="{{ route('responsibility.index') }}" class="menu-link">
-                                <div>Tanggung jawabmu</div>
-                            </a>
-                        </li>
+                       
                     @elseif (Auth::user()->role === 'HRD')
                         <li class="menu-item {{ Route::is('intern.*') ? 'active' : '' }}">
                             <a href="{{ route('intern.index') }}" class="menu-link active ">
@@ -68,18 +58,18 @@
                             </a>
                         </li>
                         <li class="menu-item {{ Route::is('approval.*') ? 'active' : '' }}">
-                            <a href="{{ route('approval.index') }}" class="menu-link">
+                            <a href="" class="menu-link">
                                 <div>Approval</div>
                             </a>
                         </li>
                         <li class="menu-item {{ Route::is('responsibility.*') ? 'active' : '' }}">
-                            <a href="{{ route('responsibility.index') }}" class="menu-link">
+                            <a href="" class="menu-link">
                                 <div>Tanggung jawabmu</div>
                             </a>
                         </li>
                     @else
                         <li class="menu-item">
-                            <a href="{{ route('absensi.show', Auth::user()->email) }}" class="menu-link">
+                            <a href="" class="menu-link">
                                 <div>Absensi</div>
                             </a>
                         </li>
@@ -87,28 +77,7 @@
                 </ul>
             </li>
         @endif
-        <!-- / Kegiatan -->
-        <li class="menu-item {{ Route::is('absensi.*') || Route::is('sertifikat.*') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bxs-user-badge"></i>
-                <div data-i18n="Layouts">Activity</div>
-            </a>
-
-            <ul class="menu-sub">
-
-                <li class="menu-item {{ Route::is('absensi.*') ? 'active' : '' }}">
-                    <a href="{{ route('absensi.show', Auth::user()->email) }}" class="menu-link">
-                        <div>Absensi</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ Route::is('sertifikat.*') ? 'active' : '' }}">
-                    <a href="{{ route('sertifikat.show', Auth::user()->email) }}" class="menu-link">
-                        <div>Cetak Sertifikat </div>
-                    </a>
-                </li>
-
-            </ul>
-        </li>
+    
 
     </ul>
 </aside>

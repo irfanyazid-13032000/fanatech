@@ -3,7 +3,7 @@
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
-                <span class="ms-2 fw-bold fs-4">Selamat Datang, Sobat Lokpro</span>
+                <span class="ms-2 fw-bold fs-4">Selamat Datang, {{ Auth::user()->name }}</span>
             </div>
         </div>
         <ul class="navbar-nav flex-row align-items-center ms-auto">
