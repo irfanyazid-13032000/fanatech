@@ -8,6 +8,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FillPDFController;
+use App\Http\Controllers\DatatableController;
+use App\Http\Controllers\PelatihanController;
+use App\Http\Controllers\PendidikanController;
+use App\Http\Controllers\PengalamanController;
+use App\Http\Controllers\PersonaliaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +31,23 @@ Route::get('/', function () {
 
 
 Route::get('/skk', [SkkController::class, 'index'])->name('skk.index')->middleware('admin');
+Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan.index')->middleware('admin');
+Route::get('/pendidikan', [PendidikanController::class, 'index'])->name('pendidikan.index')->middleware('admin');
+Route::get('/personalia', [PersonaliaController::class, 'index'])->name('personalia.index')->middleware('admin');
+Route::get('/pengalaman', [PengalamanController::class, 'index'])->name('pengalaman.index')->middleware('admin');
+
+
+
+// Route::get('/assessment', [PengalamanController::class, 'index'])->name('assessment.index')->middleware('admin');
+// Route::get('/assessor', [PengalamanController::class, 'index'])->name('assessor.index')->middleware('admin');
+// Route::get('/tkk', [PengalamanController::class, 'index'])->name('tkk.index')->middleware('admin');
+
+Route::get('/data-skk', [DatatableController::class, 'dataSKK'])->name('data-skk');
+Route::get('/data-pelatihan', [DatatableController::class, 'dataPelatihan'])->name('data-pelatihan');
+Route::get('/data-pendidikan', [DatatableController::class, 'dataPendidikan'])->name('data-pendidikan');
+Route::get('/data-personalia', [DatatableController::class, 'dataPersonalia'])->name('data-personalia');
+Route::get('/data-pengalaman', [DatatableController::class, 'dataPengalaman'])->name('data-pengalaman');
+
 
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('admin');

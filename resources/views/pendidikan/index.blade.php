@@ -1,27 +1,26 @@
 @extends('layouts.app')
-@section('title', 'Data SKK')
+@section('title', 'Data Pendidikan')
 @section('content')
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span> Data SKK</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span> Data Pendidikan</h4>
     <div class="card">
         <div class="d-flex pe-4">
-            <h5 class="card-header">SKK</h5>
+            <h5 class="card-header">Pendidikan</h5>
         </div>
         <div class="table-responsive text-nowrap p-4">
             <table class="table table-hover" id="table">
                 <thead>
                     <tr class="text-center">
                         <th>No</th>
-                        <th>TUK</th>
-                        <th>No Registrasi Keanggotaan Asosiasi Profesi</th>
+                        <th>Institusi</th>
                         <th>Jenjang</th>
-                        <th>Jenis Permohonan</th>
-                        <th>LSP</th>
-                        <th>Sertifikat SKK</th>
-                        <th>Asosiasi</th>
-                        <th>Kualifikasi</th>
-                        <th>Klasifikasi</th>
-                        <th>Sub Klasifikasi</th>
-                        <th>Jabatan Kerja</th>
+                        <th>negara</th>
+                        <th>kabupaten</th>
+                        <th>file surat ket lulus</th>
+                        <th>Program studi</th>
+                        <th>tahun lulus</th>
+                        <th>alamat</th>
+                        <th>provinsi</th>
+                        <th>File Ijazah</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
@@ -44,20 +43,19 @@
             $('#table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: `{{route('data-skk')}}`,
+                ajax: `{{route('data-pendidikan')}}`,
                 columns: [
                     { data: null, name: 'row_number', searchable: false, orderable: false, className: 'text-center' },
-                    { data: 'tuk', name: 'tuk' },
-                    { data: 'no_reg_keanggotaan_profesi', name: 'no_reg_keanggotaan_profesi' },
+                    { data: 'institusi', name: 'institusi' },
                     { data: 'jenjang', name: 'jenjang' },
-                    { data: 'jenis_permohonan', name: 'jenis_permohonan' },
-                    { data: 'lsp', name: 'lsp' },
-                    { data: 'sertifikat_skk', name: 'sertifikat_skk' },
-                    { data: 'asosiasi', name: 'asosiasi' },
-                    { data: 'kualifikasi', name: 'kualifikasi' },
-                    { data: 'klasifikasi', name: 'klasifikasi' },
-                    { data: 'sub_klasifikasi', name: 'sub_klasifikasi' },
-                    { data: 'jabatan_kerja', name: 'jabatan_kerja' },
+                    { data: 'negara', name: 'negara' },
+                    { data: 'kabupaten', name: 'kabupaten' },
+                    { data: 'file_surat_ket_lulus', name: 'file_surat_ket_lulus' },
+                    { data: 'program_studi', name: 'program_studi' },
+                    { data: 'tahun_lulus', name: 'tahun_lulus' },
+                    { data: 'alamat', name: 'alamat' },
+                    { data: 'provinsi', name: 'provinsi' },
+                    { data: 'file_ijazah', name: 'file_ijazah' },
                 ],
                 createdRow: function (row, data, dataIndex) {
                     // Set the row number

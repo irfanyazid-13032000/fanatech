@@ -25,17 +25,37 @@
         <!-- Layouts -->
         @if (Auth::user()->role === 'Admin' || Auth::user()->role === 'HRD')
             <li
-                class="menu-item {{ Route::is('skk.*') || Route::is('divisi.*') || Route::is('rekap.*') || Route::is('intern.*') || Route::is('role.*') ? 'active open' : '' }}">
+                class="menu-item {{ Route::is('skk.*') || Route::is('pelatihan.*') || Route::is('pendidikan.*') || Route::is('personalia.*') || Route::is('pengalaman.*') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bxs-user-check"></i>
-                    <div data-i18n="Layouts">Skk </div>
+                    <div data-i18n="Layouts">SKK </div>
                 </a>
 
                 <ul class="menu-sub">
                     @if (Auth::user()->role === 'Admin')
                         <li class="menu-item {{ Route::is('skk.*') ? 'active' : '' }}">
                             <a href="{{ route('skk.index') }}" class="menu-link active">
-                                <div>Get SKK</div>
+                                <div>Klasifikasi Kualifikasi</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('pelatihan.*') ? 'active' : '' }}">
+                            <a href="{{ route('pelatihan.index') }}" class="menu-link active">
+                                <div>Pelatihan</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('pendidikan.*') ? 'active' : '' }}">
+                            <a href="{{ route('pendidikan.index') }}" class="menu-link active">
+                                <div>Pendidikan</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('personalia.*') ? 'active' : '' }}">
+                            <a href="{{ route('personalia.index') }}" class="menu-link active">
+                                <div>Personalia</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('pengalaman.*') ? 'active' : '' }}">
+                            <a href="{{ route('pengalaman.index') }}" class="menu-link active">
+                                <div>Pengalaman</div>
                             </a>
                         </li>
                     
@@ -77,6 +97,32 @@
                 </ul>
             </li>
         @endif
+
+        <li
+                class="menu-item {{ Route::is('skk.*') || Route::is('pelatihan.*') || Route::is('pendidikan.*') || Route::is('personalia.*') || Route::is('pengalaman.*') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bxs-user-check"></i>
+                    <div data-i18n="Layouts">Assesment </div>
+                </a>
+
+                <ul class="menu-sub">
+                        <li class="menu-item {{ Route::is('assessment.*') ? 'active' : '' }}">
+                            <a href="#" class="menu-link active">
+                                <div>Jadwal Assesment</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('assessor.*') ? 'active' : '' }}">
+                            <a href="#" class="menu-link active">
+                                <div>Surat Tugas Assessor</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('tkk.*') ? 'active' : '' }}">
+                            <a href="#" class="menu-link active">
+                                <div>Surat Undangan TKK</div>
+                            </a>
+                        </li>
+                </ul>
+        </li>
     
 
     </ul>
