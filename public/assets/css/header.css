@@ -1,0 +1,55 @@
+body {
+  margin: 0; /* Reset the default margin */
+  padding: 0; /* Reset the default padding */
+}
+
+.header {
+  width: 100%; /* Set the table width to 100% to take the full width of the header */
+  border-collapse: collapse; /* Remove spacing between table cells */
+  opacity: .5;
+}
+
+.header img {
+  display: block; /* Remove any extra spacing around the image */
+  width: 100px;
+}
+
+.header td {
+  padding: 5px; /* Add some padding around the table cells for spacing */
+  vertical-align: top; /* Align the text to the top of the cell */
+}
+
+.header p{
+  /* padding:0; */
+  margin:0;
+}
+
+.lembaga {
+  font-size: 24px; /* Specific font size for "LEMBAGA SERTIFIKASI PROFESI" */
+  font-family: "Times New Roman", Times, serif; /* Set the font family to Times New Roman */
+  font-weight: bold; /* Make the text bold */
+}
+
+.lsp {
+  font-size: 30px; /* Specific font size for "LSP. MITRA SERTIFINDO KONSTRUKSI" */
+  font-family: "Times New Roman", Times, serif; /* Set the font family to Times New Roman */
+  font-weight: bold; /* Make the text normal (not bold) */
+}
+.sertifikasi {
+  font-size: 19px; /* Specific font size for "LSP. MITRA SERTIFINDO KONSTRUKSI" */
+  font-family: "Times New Roman", Times, serif; /* Set the font family to Times New Roman */
+  font-weight: bold; /* Make the text normal (not bold) */
+  padding-left:300px;
+  font-style: italic; /* Make the text inside .sertifikasi italic */
+}
+
+.alamat {
+font-size: 16px; /* Specific font size for "LSP. MITRA SERTIFINDO KONSTRUKSI" */
+font-family: "Times New Roman", Times, serif; /* Set the font family to Times New Roman */
+text-align: center; /* Center align the text inside .alamat */
+}
+
+hr {
+border: 1px solid black; /* Change the border width to make the hr element appear bold */
+opacity: .5;
+}

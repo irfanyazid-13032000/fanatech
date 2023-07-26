@@ -22,6 +22,7 @@
                         <th>Klasifikasi</th>
                         <th>Sub Klasifikasi</th>
                         <th>Jabatan Kerja</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
@@ -58,6 +59,17 @@
                     { data: 'klasifikasi', name: 'klasifikasi' },
                     { data: 'sub_klasifikasi', name: 'sub_klasifikasi' },
                     { data: 'jabatan_kerja', name: 'jabatan_kerja' },
+                    {
+                        data:'status',
+                        name:'status',
+                        render:function (data,type,row,meta) {
+                            if (row.status == '') {
+                                return '<button class="btn btn-danger">Belum</button>'
+                            }else{
+                                return '<button class="btn btn-success">Sudah</button>'
+                            }
+                        }
+                    },
                 ],
                 createdRow: function (row, data, dataIndex) {
                     // Set the row number

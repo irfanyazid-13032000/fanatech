@@ -99,7 +99,7 @@
         @endif
 
         <li
-                class="menu-item {{ Route::is('skk.*') || Route::is('pelatihan.*') || Route::is('pendidikan.*') || Route::is('personalia.*') || Route::is('pengalaman.*') ? 'active open' : '' }}">
+                class="menu-item {{ Route::is('skk.*')  ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bxs-user-check"></i>
                     <div data-i18n="Layouts">Assesment </div>
@@ -112,13 +112,46 @@
                             </a>
                         </li>
                         <li class="menu-item {{ Route::is('assessor.*') ? 'active' : '' }}">
-                            <a href="#" class="menu-link active">
+                            <a href="{{route('assessor.index')}}" class="menu-link active">
                                 <div>Surat Tugas Assessor</div>
                             </a>
                         </li>
-                        <li class="menu-item {{ Route::is('tkk.*') ? 'active' : '' }}">
-                            <a href="#" class="menu-link active">
+                        <li class="menu-item {{ Route::is('undangan.*') ? 'active' : '' }}">
+                            <a href="{{route('undangan.index')}}" class="menu-link active">
                                 <div>Surat Undangan TKK</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('berita.*') ? 'active' : '' }}">
+                            <a href="{{route('berita.index')}}" class="menu-link active">
+                                <div>Berita Acara</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('lampiran.*') ? 'active' : '' }}">
+                            <a href="{{route('lampiran.index')}}" class="menu-link active">
+                                <div>Lampiran</div>
+                            </a>
+                        </li>
+                </ul>
+        </li>
+
+
+
+        <li
+                class="menu-item {{ Route::is('confirm.*') || Route::is('invoice.*')  ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bxs-user-check"></i>
+                    <div data-i18n="Layouts">Payment </div>
+                </a>
+
+                <ul class="menu-sub">
+                        <li class="menu-item {{ Route::is('invoice.*') ? 'active' : '' }}">
+                            <a href="{{route('invoice.index')}}" class="menu-link active">
+                                <div>Invoice</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('confirm.*') ? 'active' : '' }}">
+                            <a href="{{route('confirm.index')}}" class="menu-link active">
+                                <div>Konfirmasi Pembayaran</div>
                             </a>
                         </li>
                 </ul>

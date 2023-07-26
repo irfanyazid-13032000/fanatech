@@ -21,6 +21,7 @@
                         <th>Tgl Akhir</th>
                         <th>Nilai Proyek</th>
                         <th>Pengguna Jasa</th>
+                        <th>Status</th>
                 </thead>
                 <tbody class="table-border-bottom-0">
                    
@@ -55,6 +56,17 @@
                     { data: 'tgl_akhir', name: 'tgl_akhir' },
                     { data: 'nilai_proyek', name: 'nilai_proyek' },
                     { data: 'pengguna_jasa', name: 'pengguna_jasa' },
+                    {
+                        data:'status',
+                        name:'status',
+                        render:function (data,type,row,meta) {
+                            if (row.status == '') {
+                                return '<button class="btn btn-danger">Belum</button>'
+                            }else{
+                                return '<button class="btn btn-success">Sudah</button>'
+                            }
+                        }
+                    },
                 ],
                 createdRow: function (row, data, dataIndex) {
                     // Set the row number

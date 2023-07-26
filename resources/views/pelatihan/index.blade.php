@@ -18,6 +18,7 @@
                         <th>Nama Pelatihan & sertifikat</th>
                         <th>Tgl Akhir</th>
                         <th>Jumlah Hari</th>
+                        <th>status</th>
                 </thead>
                 <tbody class="table-border-bottom-0">
                    
@@ -49,6 +50,17 @@
                     { data: 'nama_pelatihan_dan_sertifikat', name: 'nama_pelatihan_dan_sertifikat' },
                     { data: 'tgl_akhir', name: 'tgl_akhir' },
                     { data: 'jumlah_hari', name: 'jumlah_hari' },
+                    {
+                        data:'status',
+                        name:'status',
+                        render:function (data,type,row,meta) {
+                            if (row.status == '') {
+                                return '<button class="btn btn-danger">Belum</button>'
+                            }else{
+                                return '<button class="btn btn-success">Sudah</button>'
+                            }
+                        }
+                    },
                 ],
                 createdRow: function (row, data, dataIndex) {
                     // Set the row number

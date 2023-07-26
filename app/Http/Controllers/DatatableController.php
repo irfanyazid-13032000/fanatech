@@ -34,9 +34,22 @@ class DatatableController extends Controller
     }
     public function dataPengalaman()
     {
-        // return 'klkl';
         $pengalaman = DB::table('persyaratan_pengalaman')->get();
        
         return datatables()->of($pengalaman)->toJson();
+    }
+
+    public function dataInvoice()
+    {
+        $invoice = DB::table('invoice')->get();
+       
+        return datatables()->of($invoice)->toJson();
+    }
+
+    public function dataConfirm()
+    {
+        $confirm_payment = DB::table('confirm_payment')->get();
+       
+        return datatables()->of($confirm_payment)->toJson();
     }
 }

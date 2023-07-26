@@ -7,7 +7,10 @@ use App\Http\Controllers\SkkController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\FillPDFController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\UndanganController;
 use App\Http\Controllers\DatatableController;
 use App\Http\Controllers\PelatihanController;
 use App\Http\Controllers\PendidikanController;
@@ -39,15 +42,31 @@ Route::get('/pengalaman', [PengalamanController::class, 'index'])->name('pengala
 
 
 // Route::get('/assessment', [PengalamanController::class, 'index'])->name('assessment.index')->middleware('admin');
-// Route::get('/assessor', [PengalamanController::class, 'index'])->name('assessor.index')->middleware('admin');
-// Route::get('/tkk', [PengalamanController::class, 'index'])->name('tkk.index')->middleware('admin');
+Route::get('/asesor', [AsesorController::class, 'index'])->name('assessor.index')->middleware('admin');
+Route::get('/lampiran', [AsesorController::class, 'lampiran'])->name('lampiran.index')->middleware('admin');
+Route::get('/undangan', [UndanganController::class, 'index'])->name('undangan.index')->middleware('admin');
+Route::get('/berita-acara', [UndanganController::class, 'beritaAcara'])->name('berita.index')->middleware('admin');
 
+// datatable TKK
 Route::get('/data-skk', [DatatableController::class, 'dataSKK'])->name('data-skk');
 Route::get('/data-pelatihan', [DatatableController::class, 'dataPelatihan'])->name('data-pelatihan');
 Route::get('/data-pendidikan', [DatatableController::class, 'dataPendidikan'])->name('data-pendidikan');
 Route::get('/data-personalia', [DatatableController::class, 'dataPersonalia'])->name('data-personalia');
 Route::get('/data-pengalaman', [DatatableController::class, 'dataPengalaman'])->name('data-pengalaman');
 
+
+
+// payment
+Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice.index')->middleware('admin');
+Route::get('/confirm-payment', [InvoiceController::class, 'confirmPayment'])->name('confirm.index')->middleware('admin');
+
+
+// datatable payment
+Route::get('/data-invoice', [DatatableController::class, 'dataInvoice'])->name('data-invoice');
+Route::get('/data-confirm', [DatatableController::class, 'dataConfirm'])->name('data-confirm');
+
+
+ 
 
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('admin');

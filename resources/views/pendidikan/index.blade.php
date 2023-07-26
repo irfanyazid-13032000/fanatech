@@ -21,6 +21,7 @@
                         <th>alamat</th>
                         <th>provinsi</th>
                         <th>File Ijazah</th>
+                        <th>status</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
@@ -56,6 +57,17 @@
                     { data: 'alamat', name: 'alamat' },
                     { data: 'provinsi', name: 'provinsi' },
                     { data: 'file_ijazah', name: 'file_ijazah' },
+                    {
+                        data:'status',
+                        name:'status',
+                        render:function (data,type,row,meta) {
+                            if (row.status == '') {
+                                return '<button class="btn btn-danger">Belum</button>'
+                            }else{
+                                return '<button class="btn btn-success">Sudah</button>'
+                            }
+                        }
+                    },
                 ],
                 createdRow: function (row, data, dataIndex) {
                     // Set the row number
