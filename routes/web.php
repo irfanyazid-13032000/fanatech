@@ -34,6 +34,7 @@ Route::get('/', function () {
 
 
 Route::get('/skk', [SkkController::class, 'index'])->name('skk.index')->middleware('admin');
+Route::get('/status-skk/{id}', [SkkController::class, 'status'])->name('skk.status')->middleware('admin');
 Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan.index')->middleware('admin');
 Route::get('/pendidikan', [PendidikanController::class, 'index'])->name('pendidikan.index')->middleware('admin');
 Route::get('/personalia', [PersonaliaController::class, 'index'])->name('personalia.index')->middleware('admin');

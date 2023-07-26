@@ -9,5 +9,8 @@ class SKK extends Model
 {
     use HasFactory;
 
+    protected $table = 'klasifikasi_kualifikasi';
+
+
     protected $guarded = ['id'];
 }

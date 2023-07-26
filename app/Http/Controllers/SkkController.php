@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SKK;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SkkController extends Controller
 {
@@ -25,17 +27,19 @@ class SkkController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+  
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function status(string $id)
     {
-        //
+        $SKK = DB::table('klasifikasi_kualifikasi')
+                    ->where('id',$id)
+                    ->first();
+
+
+        return view('skk.status',['SKK'=>$SKK]);
     }
 
     /**
