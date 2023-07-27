@@ -5,7 +5,7 @@
             <script>
                 document.write(new Date().getFullYear());
             </script>
-            , Lokpro Media
+            , SKK LSP
         </div>
     </div>
 </footer>
