@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UndanganController extends Controller
 {
@@ -11,12 +12,17 @@ class UndanganController extends Controller
      */
     public function index()
     {
-        return view('assessment.undangan-tkk');
+        // return view('assessment.undangan-tkk');
+        return view('undangan.index');
     }
 
-    public function beritaAcara()
+    
+
+    public function export($id)
     {
-        return view('assessment.berita-acara-asesor');
+        $undangan = DB::table('undangan')->where('id',$id)->get()->first();
+        // dd($undangan);
+        return view('undangan.undangan-tkk',compact('undangan'));
     }
 
     /**
@@ -64,6 +70,6 @@ class UndanganController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return $id;
     }
 }

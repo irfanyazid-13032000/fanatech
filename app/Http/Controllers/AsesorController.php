@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asesor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AsesorController extends Controller
 {
@@ -11,20 +13,72 @@ class AsesorController extends Controller
      */
     public function index()
     {
-        return view('assessment.surat-tugas-asesor');
+        
+        // return view('assessment.surat-tugas-asesor');
+        return view('asesor.index');
+
     }
 
-    public function lampiran()
+    public function anggota($no_surat)
     {
-        return view('assessment.lampiran-surat-tugas-asesor');
+        $anggotas = DB::table('tugas_asesors')
+                    ->where('no_surat_asesor',$no_surat)
+                    ->get();
+        // dd($anggotas);
+
+        return view('asesor.anggota',compact('anggotas','no_surat'));
     }
+
+
+    public function exportSurat($no_surat)
+    {
+
+        $asesor = Asesor::where('no_surat', $no_surat)->get()->first();
+
+        $anggotas = DB::table('tugas_asesors')
+                    ->where('no_surat_asesor',$no_surat)
+                    ->get();
+
+        // dd($asesor);
+
+
+        
+
+        // return view('asesor.surat-tugas-asesor',compact('asesor','anggotas')); 
+        return view('asesor.surat-tugas-asesor',compact('asesor','anggotas')); 
+    }
+
+    public function tambahAnggota(Request $request,$no_surat)
+    {
+
+       DB::table('tugas_asesors')->insert([
+        'no_surat_asesor'=>$no_surat,
+        'nama' => $request->name,
+        'jabatan' => $request->jabatan,
+        'reg_met' => $request->reg_met,
+       ]);
+
+       return redirect()->route('anggota.asesor',['no_surat'=>$no_surat]);
+    }
+
+
+    public function hapusAnggota($id,$no_surat)
+    {
+        
+        DB::table('tugas_asesors')->where('id', $id)->delete();
+
+        return redirect()->route('anggota.asesor',['no_surat'=>$no_surat]);
+
+    }
+
+  
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('asesor.tambah-asesor');
     }
 
     /**
@@ -32,7 +86,15 @@ class AsesorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('asesors')->insert([
+            'no_surat' => $request->no_surat,
+            'tempat' => $request->tempat,
+            'alamat' => $request->alamat,
+            'jumlah_asesi' => $request->jumlah_asesi,
+            'tanggal' => $request->tanggal,
+        ]);
+
+        return redirect()->route('asesor.index');
     }
 
     /**

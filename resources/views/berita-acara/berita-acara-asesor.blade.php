@@ -6,9 +6,6 @@
   <title>Document</title>
   <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
   <style>
-
-
-/* ini potrait */
     p{
       margin:0;
     }
@@ -29,7 +26,6 @@
 
     .keterangan{
       padding-left:20px;
-      font-family:arial;
     }
 
     .keterangan td{
@@ -55,13 +51,6 @@
       padding-left:20px;
       border:1px solid black;
       border-collapse:collapse;
-
-    }
-
-    .yang{
-      margin-left:20px;
-      font-family:arial;
-      font-size:18px;
 
     }
 
@@ -132,20 +121,9 @@
 }
 
 
-/* end potrait */
-
-.landscape-content {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-
   </style>
 </head>
 <body>
-
-<div class="potrait">
 
   <table class="header">
     <tr>
@@ -165,14 +143,56 @@
 
 
   <div class="content">
-    <p class="berita">SURAT PERINTAH TUGAS ASESOR KOMPETENSI</p>
-    <p class="no">NO:.............................................</p>
+    <p class="berita">BERITA ACARA HASIL KOMPETENSI</p>
+    <p class="no">NO:{{$beritaAcara->no_surat}}</p>
 
     <br>
     <br>
     <br>
 
-    <p class="yang">Yang Bertanda tangan dibawah Ini memberikan Tugas Kepada :</p>
+
+    <table class="keterangan">
+      <tr>
+        <td>Nama LSP</td>
+        <td>:</td>
+        <td>Mitra Sertifindo Konstruksi</td>
+      </tr>
+      <tr>
+        <td class="alamat">Alamat</td>
+        <td class="titikDua">:</td>
+        <td>Aptakindo Jl. Raya Mayor Abd Rahman No. 9  Bojong Kec. Kemang Kab. Bogor</td>
+      </tr>
+      <tr>
+        <td>Tempat Uji</td>
+        <td>:</td>
+        <td>{{$beritaAcara->tempat_uji}}</td>
+      </tr>
+      <tr>
+        <td>Jumlah Asesi</td>
+        <td>:</td>
+        <td>{{$beritaAcara->jumlah_asesi}}</td>
+      </tr>
+      <tr>
+        <td>Kompeten</td>
+        <td>:</td>
+        <td>{{$beritaAcara->kompeten}}</td>
+      </tr>
+      <tr>
+        <td>Belum Kompeten</td>
+        <td>:</td>
+        <td>{{$beritaAcara->belum_kompeten}}</td>
+      </tr>
+      <tr>
+        <td>Nama Asesor</td>
+        <td>:</td>
+        <td>{{$beritaAcara->nama_asesor}}</td>
+      </tr>
+    </table>
+
+
+
+
+
 
     <table class="skema">
       <thead>
@@ -184,64 +204,20 @@
         </tr>
       </thead>
       <tbody>
+        @foreach ($pesertaTes as $peserta )
         <tr>
-          <td>1</td>
-          <td>yajid</td>
-          <td>kursus</td>
-          <td>890</td>
+          <td>{{$loop->iteration}}</td>
+          <td>{{$peserta->nama}}</td>
+          <td>{{ $peserta->skema }}</td>
+          <td>{{$peserta->hasil}}</td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>toni</td>
-          <td>kursus</td>
-          <td>800</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>rudi</td>
-          <td>bimbel</td>
-          <td>200</td>
-        </tr>
+        @endforeach
+        
       </tbody>
     </table>
 
     <br>
-   
-
-    <p class="yang">Untuk Melakukan Uji Kompetensi pada :</p>
-
     <br>
-    
-
-    <table class="keterangan">
-      <tr>
-        <td>Hari/Tanggal</td>
-        <td>:</td>
-        <td>Senin, 30 Juni 2024</td>
-      </tr>
-      
-     
-      <tr>
-        <td>Tempat</td>
-        <td>:</td>
-        <td>Mangga Dua</td>
-      </tr>
-      <tr>
-        <td>Alamat</td>
-        <td>:</td>
-        <td>Jl. Mangga 2</td>
-      </tr>
-      <tr>
-        <td>Jumlah Asesi</td>
-        <td>:</td>
-        <td>2</td>
-      </tr>
-    </table>
-
-    <br>
-
-    <p class="yang">Demikian Surat Tugas Ini Dibuat untuk dilaksanakan Sebaik baiknya</p>
-
     <br>
 
     <table class="ttd">
@@ -258,7 +234,7 @@
               <tr>
                 <td style="border-bottom: 1px solid black;">Pada Tanggal</td>
                 <td style="border-bottom: 1px solid black;">:</td>
-                <td style="border-bottom: 1px solid black;">30 mei 2023</td>
+                <td style="border-bottom: 1px solid black;">{{$beritaAcara->tanggal}}</td>
               </tr>
             </table>
           </div>
@@ -278,9 +254,6 @@
 
 
   </div>
-
-
-</div>
 
   
 </body>

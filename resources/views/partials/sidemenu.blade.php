@@ -99,7 +99,7 @@
         @endif
 
         <li
-                class="menu-item {{ Route::is('skk.*')  ? 'active open' : '' }}">
+                class="menu-item {{ Route::is('asesor.*') || Route::is('undangan.*') || Route::is('berita.*') || Route::is('lampiran.*') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bxs-user-check"></i>
                     <div data-i18n="Layouts">Assesment </div>
@@ -111,8 +111,8 @@
                                 <div>Jadwal Assesment</div>
                             </a>
                         </li>
-                        <li class="menu-item {{ Route::is('assessor.*') ? 'active' : '' }}">
-                            <a href="{{route('assessor.index')}}" class="menu-link active">
+                        <li class="menu-item {{ Route::is('asesor.*') ? 'active' : '' }}">
+                            <a href="{{route('asesor.index')}}" class="menu-link active">
                                 <div>Surat Tugas Assessor</div>
                             </a>
                         </li>

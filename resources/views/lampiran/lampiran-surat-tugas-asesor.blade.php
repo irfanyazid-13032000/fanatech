@@ -67,6 +67,7 @@
       padding-left:20px;
       border:1px solid black;
       border-collapse:collapse;
+      width:95%;
 
     }
 
@@ -124,8 +125,17 @@
 }
 
 .image-container {
+  padding-left:140px;
   display: flex;
   justify-content: center; /* Horizontally center the image */
+}
+
+.image-container img{
+  width:99px;
+}
+
+.ttdJabatan{
+  padding-left:140px;
 }
 
 /* Additional styles for the table, etc. */
@@ -191,10 +201,12 @@
         <tr>
           <td>Nomor</td>
           <td>:</td>
+          <td>{{$lampiran->no_surat}}</td>
         </tr>
         <tr>
           <td>Tanggal</td>
           <td>:</td>
+          <td>{{$lampiran->tanggal}}</td>
         </tr>
       </table>
    
@@ -203,35 +215,37 @@
     <table class="skema">
       <thead>
         <tr>
-          <td>No</td>
-          <td width="40%">Nama</td>
-          <td width="40%">Skema</td>
-          <td width="40%">Hasil (K/BK)</td>
+          <td width="5%">No</td>
+          <td width="20%">Nama Asesi</td>
+          <td width="20%">Skema</td>
+          <td width="10%">Jam</td>
+          <td width="15%">Ruang</td>
+          <td width="20%">Asesor</td>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>yajid</td>
-          <td>kursus</td>
-          <td>890</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>toni</td>
-          <td>kursus</td>
-          <td>800</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>rudi</td>
-          <td>bimbel</td>
-          <td>200</td>
-        </tr>
+
+      @foreach ($pesertaLampiran as $peserta)
+        
+      <tr>
+        <td>{{$loop->iteration}}</td>
+        <td>{{ $peserta->nama_asesi }}</td>
+        <td>{{ $peserta->skema }}</td>
+        <td>{{ $peserta->jam }}</td>
+        <td>{{ $peserta->ruang }}</td>
+        <td>{{ $peserta->asesor }}</td>
+      </tr>
+      
+      @endforeach
+        
+     
+
+
+        
+       
       </tbody>
     </table>
 
-    <br>
 
     <table class="ttd">
       <tr>
@@ -242,12 +256,12 @@
               <tr>
                 <td>Ditetapkan</td>
                 <td>:</td>
-                <td>Bogor</td>
+                <td>{{$lampiran->tempat}}</td>
               </tr>
               <tr>
                 <td style="border-bottom: 1px solid black;">Pada Tanggal</td>
                 <td style="border-bottom: 1px solid black;">:</td>
-                <td style="border-bottom: 1px solid black;">30 mei 2023</td>
+                <td style="border-bottom: 1px solid black;">{{$lampiran->tanggal}}</td>
               </tr>
             </table>
           </div>
@@ -258,8 +272,10 @@
           <div class="image-container">
             <img src="{{asset('assets/images/naruto signature.png')}}" alt="Signature">
           </div>
-          <p class="namaTTD">(Ny. Neneng Rusana)</p>
-          <p class="jabatan">Ketua LSP</p>
+          <div class="ttdJabatan">
+            <p class="namaTTD">(Ny. Neneng Rusana)</p>
+            <p class="jabatan">Ketua LSP</p>
+          </div>
         </td>
       </tr>
      

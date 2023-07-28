@@ -6,6 +6,10 @@
   <title>Document</title>
   <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
   <style>
+
+
+
+/* ini potrait */
     p{
       margin:0;
     }
@@ -26,6 +30,7 @@
 
     .keterangan{
       padding-left:20px;
+      font-family:arial;
     }
 
     .keterangan td{
@@ -51,6 +56,13 @@
       padding-left:20px;
       border:1px solid black;
       border-collapse:collapse;
+
+    }
+
+    .yang{
+      margin-left:20px;
+      font-family:arial;
+      font-size:18px;
 
     }
 
@@ -121,9 +133,20 @@
 }
 
 
+/* end potrait */
+
+.landscape-content {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+
   </style>
 </head>
 <body>
+
+<div class="potrait">
 
   <table class="header">
     <tr>
@@ -143,90 +166,74 @@
 
 
   <div class="content">
-    <p class="berita">BERITA ACARA HASIL KOMPETENSI</p>
-    <p class="no">NO:.............................................</p>
+    <p class="berita">SURAT PERINTAH TUGAS ASESOR KOMPETENSI</p>
+    <p class="no">NO:{{$asesor->no_surat}}</p>
 
     <br>
     <br>
     <br>
 
-
-    <table class="keterangan">
-      <tr>
-        <td>Nama LSP</td>
-        <td>:</td>
-        <td>Mitra Sertifindo Konstruksi</td>
-      </tr>
-      <tr>
-        <td class="alamat">Alamat</td>
-        <td class="titikDua">:</td>
-        <td>Aptakindo Jl. Raya Mayor Abd Rahman No. 9  Bojong Kec. Kemang Kab. Bogor</td>
-      </tr>
-      <tr>
-        <td>Tempat Uji</td>
-        <td>:</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Jumlah Asesi</td>
-        <td>:</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Kompeten</td>
-        <td>:</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Belum Kompeten</td>
-        <td>:</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Nama Asesor</td>
-        <td>:</td>
-        <td></td>
-      </tr>
-    </table>
-
-
-
-
-
+    <p class="yang">Yang Bertanda tangan dibawah Ini memberikan Tugas Kepada :</p>
 
     <table class="skema">
       <thead>
         <tr>
           <td>No</td>
           <td width="40%">Nama</td>
-          <td width="40%">Skema</td>
-          <td width="40%">Hasil (K/BK)</td>
+          <td width="40%">Jabatan</td>
+          <td width="40%">Reg Met</td>
         </tr>
       </thead>
       <tbody>
+        @foreach ($anggotas as $anggota)
         <tr>
-          <td>1</td>
-          <td>yajid</td>
-          <td>kursus</td>
-          <td>890</td>
+          <td>{{$loop->iteration}}</td>
+          <td>{{$anggota->nama}}</td>
+          <td>{{$anggota->jabatan}}</td>
+          <td>{{$anggota->reg_met}}</td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>toni</td>
-          <td>kursus</td>
-          <td>800</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>rudi</td>
-          <td>bimbel</td>
-          <td>200</td>
-        </tr>
+        @endforeach
+      
       </tbody>
     </table>
 
     <br>
+   
+
+    <p class="yang">Untuk Melakukan Uji Kompetensi pada :</p>
+
     <br>
+    
+
+    <table class="keterangan">
+      <tr>
+        <td>Hari/Tanggal</td>
+        <td>:</td>
+        <td>{{$asesor->tanggal}}</td>
+      </tr>
+      
+     
+      <tr>
+        <td>Tempat</td>
+        <td>:</td>
+        <td>{{$asesor->tempat}}</td>
+      </tr>
+      <tr>
+        <td>Alamat</td>
+        <td>:</td>
+        <td>{{$asesor->alamat}}</td>
+      </tr>
+      <tr>
+        <td>Jumlah Asesi</td>
+        <td>:</td>
+        <td>{{$asesor->jumlah_asesi}}</td>
+      </tr>
+    </table>
+
+    <br>
+
+    <p class="yang">Demikian Surat Tugas Ini Dibuat untuk dilaksanakan Sebaik baiknya</p>
+
     <br>
 
     <table class="ttd">
@@ -238,12 +245,12 @@
               <tr>
                 <td>Ditetapkan</td>
                 <td>:</td>
-                <td>Bogor</td>
+                <td>{{ $asesor->tempat }}</td>
               </tr>
               <tr>
                 <td style="border-bottom: 1px solid black;">Pada Tanggal</td>
                 <td style="border-bottom: 1px solid black;">:</td>
-                <td style="border-bottom: 1px solid black;">30 mei 2023</td>
+                <td style="border-bottom: 1px solid black;">{{$asesor->tanggal}}</td>
               </tr>
             </table>
           </div>
@@ -263,6 +270,9 @@
 
 
   </div>
+
+
+</div>
 
   
 </body>

@@ -52,4 +52,32 @@ class DatatableController extends Controller
        
         return datatables()->of($confirm_payment)->toJson();
     }
+    public function dataAsesor()
+    {
+        $asesors = DB::table('asesors')->get();
+       
+        return datatables()->of($asesors)->toJson();
+    }
+    public function dataUndangan()
+    {
+        $undangan = DB::table('undangan')->get();
+       
+        return datatables()->of($undangan)->toJson();
+    }
+
+
+    public function dataBeritaAcara()
+    {
+        $berita_acara = DB::table('berita_acara')->get();
+       
+        return datatables()->of($berita_acara)->toJson();
+    }
+
+
+    public function dataLampiran()
+    {
+        $lampiran = DB::table('lampiran')->get();
+       
+        return datatables()->of($lampiran)->toJson();
+    }
 }

@@ -89,25 +89,25 @@
     <tr>
       <td width="20px">No</td>
       <td width="2px">:</td>
-      <td>.........</td>
-      <td style="padding-left:450px">Bogor, ............</td>
+      <td>{{$undangan->no_surat}}</td>
+      <td style="padding-left:300px">Bogor, {{$undangan->tanggal}}</td>
     </tr>
     <tr>
       <td>Lampiran</td>
       <td>:</td>
-      <td>.........</td>
+      <td>{{$undangan->lampiran}}</td>
       <td></td>
     </tr>
   </table>
 
   <p>Kepada Yth</p>
-  <p>..........</p>
+  <p>{{$undangan->nama}}</p>
   <p style="font-weight:bold;">di <br> Tempat</p>
   <p style="font-weight:bold;">Hal: Undangan Uji Kompetensi</p>
 
   <p>Dengan Hormat,</p>
 
-  <p>Dengan ini LSP Mitra Sertifindo Konstruksi menungundang Saudara untuk mengikuti Uji Kompetensi Skema ……….…………………………. yang di laksanakan pada :</p>
+  <p>Dengan ini LSP Mitra Sertifindo Konstruksi menungundang Saudara untuk mengikuti Uji Kompetensi Skema {{ $undangan->skema }} yang di laksanakan pada :</p>
 
 
 
@@ -116,22 +116,22 @@
   <tr>
     <td>Hari/Tanggal</td>
     <td>:</td>
-    <td>Senin, 20 november 2023</td>
+    <td>{{$undangan->tanggal}}</td>
   </tr>
   <tr>
     <td>Jam</td>
     <td>:</td>
-    <td>14:00</td>
+    <td>{{$undangan->pukul}}</td>
   </tr>
   <tr>
     <td>Tempat</td>
     <td>:</td>
-    <td>Surabaya</td>
+    <td>{{$undangan->tempat}}</td>
   </tr>
   <tr>
     <td>Alamat</td>
     <td>:</td>
-    <td>Sidoarjo, Jl Veteran no 34</td>
+    <td>{{$undangan->alamat}}</td>
   </tr>
 
   </table>
