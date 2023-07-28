@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PengalamanController extends Controller
 {
@@ -12,6 +13,16 @@ class PengalamanController extends Controller
     public function index()
     {
         return view('pengalaman.index');
+    }
+
+    public function status($id)
+    {
+        $pengalaman = DB::table('persyaratan_pengalaman')
+        ->where('id',$id)
+        ->first();
+
+    
+        return view('pengalaman.status',compact('pengalaman'));
     }
 
     /**

@@ -12,12 +12,14 @@ use App\Http\Controllers\FillPDFController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LampiranController;
 use App\Http\Controllers\UndanganController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatatableController;
 use App\Http\Controllers\PelatihanController;
 use App\Http\Controllers\PendidikanController;
 use App\Http\Controllers\PengalamanController;
 use App\Http\Controllers\PersonaliaController;
 use App\Http\Controllers\BeritaAcaraController;
+use App\Http\Controllers\DownloadAPLController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,18 +31,28 @@ use App\Http\Controllers\BeritaAcaraController;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard.index');
-})->middleware('auth');
+Route::get('/', [DashboardController::class,'index'])->middleware('auth');
 
 
 // skk
 Route::get('/skk', [SkkController::class, 'index'])->name('skk.index')->middleware('admin');
 Route::get('/status-skk/{id}', [SkkController::class, 'status'])->name('skk.status')->middleware('admin');
+
+// pelatihan
 Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan.index')->middleware('admin');
+Route::get('/status-pelatihan/{id}', [PelatihanController::class, 'status'])->name('pelatihan.status')->middleware('admin');
+
+// pendidikan
 Route::get('/pendidikan', [PendidikanController::class, 'index'])->name('pendidikan.index')->middleware('admin');
+Route::get('/status-pendidikan/{id}', [PendidikanController::class, 'status'])->name('pendidikan.status')->middleware('admin');
+
+// personalia
 Route::get('/personalia', [PersonaliaController::class, 'index'])->name('personalia.index')->middleware('admin');
+Route::get('/status-personalia/{id}', [PersonaliaController::class, 'status'])->name('personalia.status')->middleware('admin');
+
+// pengalaman
 Route::get('/pengalaman', [PengalamanController::class, 'index'])->name('pengalaman.index')->middleware('admin');
+Route::get('/status-pengalaman/{id}', [PengalamanController::class, 'status'])->name('pengalaman.status')->middleware('admin');
 
 // datatable TKK
 Route::get('/data-skk', [DatatableController::class, 'dataSKK'])->name('data-skk');
@@ -113,6 +125,9 @@ Route::get('/confirm-payment', [InvoiceController::class, 'confirmPayment'])->na
 Route::get('/data-invoice', [DatatableController::class, 'dataInvoice'])->name('data-invoice');
 Route::get('/data-confirm', [DatatableController::class, 'dataConfirm'])->name('data-confirm');
 
+
+// 
+Route::get('/download/{file}', [DownloadAPLController::class, 'download'])->name('download.file')->middleware('admin');
 
  
 

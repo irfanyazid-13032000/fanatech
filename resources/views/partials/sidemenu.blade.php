@@ -4,6 +4,7 @@
     <div class="app-brand demo">
         <a href="/" class="app-brand-link">
             <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" width="100">
+            <span class="menu-text fw-bolder fs-4 ms-2">Aptakindo</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -23,7 +24,7 @@
         </li>
 
         <!-- Layouts -->
-        @if (Auth::user()->role === 'Admin' || Auth::user()->role === 'HRD')
+        @if (Auth::user()->role === 'Admin')
             <li
                 class="menu-item {{ Route::is('skk.*') || Route::is('pelatihan.*') || Route::is('pendidikan.*') || Route::is('personalia.*') || Route::is('pengalaman.*') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -32,7 +33,7 @@
                 </a>
 
                 <ul class="menu-sub">
-                    @if (Auth::user()->role === 'Admin')
+                   
                         <li class="menu-item {{ Route::is('skk.*') ? 'active' : '' }}">
                             <a href="{{ route('skk.index') }}" class="menu-link active">
                                 <div>Klasifikasi Kualifikasi</div>
@@ -60,43 +61,11 @@
                         </li>
                     
                       
-                       
-                    @elseif (Auth::user()->role === 'HRD')
-                        <li class="menu-item {{ Route::is('intern.*') ? 'active' : '' }}">
-                            <a href="{{ route('intern.index') }}" class="menu-link active ">
-                                <div>Data Anggota Magang</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Route::is('divisi.*') ? 'active' : '' }}">
-                            <a href="{{ route('divisi.index') }}" class="menu-link">
-                                <div>Master Divisi</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Route::is('rekap.*') ? 'active' : '' }}">
-                            <a href="{{ route('rekap.absensi') }}" class="menu-link">
-                                <div>Rekap Absensi</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Route::is('approval.*') ? 'active' : '' }}">
-                            <a href="" class="menu-link">
-                                <div>Approval</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Route::is('responsibility.*') ? 'active' : '' }}">
-                            <a href="" class="menu-link">
-                                <div>Tanggung jawabmu</div>
-                            </a>
-                        </li>
-                    @else
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div>Absensi</div>
-                            </a>
-                        </li>
-                    @endif
+                    
+                   
                 </ul>
             </li>
-        @endif
+        
 
         <li
                 class="menu-item {{ Route::is('asesor.*') || Route::is('undangan.*') || Route::is('berita.*') || Route::is('lampiran.*') ? 'active open' : '' }}">
@@ -156,7 +125,77 @@
                         </li>
                 </ul>
         </li>
+
+        @endif
+
+
+        @if (Auth::user()->role === 'user')
+        
+        <li
+        class="menu-item {{ Route::is('download.*') || Route::is('invoice.*')  ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bxs-user-check"></i>
+                    <div data-i18n="Layouts">Download APL </div>
+                </a>
+
+                <ul class="menu-sub">
+                        
+                        <li class="menu-item {{ Route::is('download.*') ? 'active' : '' }}">
+                            <a href="{{route('download.file',['file'=>'APL01 dan APL02 Skema 1.docx'])}}" class="menu-link active">
+                                <div>APL 01</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('download.*') ? 'active' : '' }}">
+                        <a href="{{route('download.file',['file'=>'APL01 dan APL02 Skema 1.docx'])}}" class="menu-link active">
+                                <div>APL 02 Skema 1</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('download.*') ? 'active' : '' }}">
+                        <a href="{{route('download.file',['file'=>'APL01 dan APL02 Skema 2.docx'])}}" class="menu-link active">
+                                <div>APL 02 Skema 2</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('download.*') ? 'active' : '' }}">
+                        <a href="{{route('download.file',['file'=>'APL01 dan APL02 Skema 3.docx'])}}" class="menu-link active">
+                                <div>APL 02 Skema 3</div>
+                            </a>
+                        </li>
+                </ul>
+        </li>
+        
+        <li
+        class="menu-item {{ Route::is('confirm.*') || Route::is('invoice.*')  ? 'active open' : '' }}">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bxs-user-check"></i>
+                    <div data-i18n="Layouts">Upload APL </div>
+                </a>
+
+                <ul class="menu-sub">
+                    
+                    <li class="menu-item {{ Route::is('download.*') ? 'active' : '' }}">
+                        <a href="{{route('download.file',['file'=>'APL01 dan APL02 Skema 1.docx'])}}" class="menu-link active">
+                            <div>APL 01</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Route::is('download.*') ? 'active' : '' }}">
+                        <a href="{{route('download.file',['file'=>'APL01 dan APL02 Skema 1.docx'])}}" class="menu-link active">
+                                <div>APL 02 Skema 1</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('download.*') ? 'active' : '' }}">
+                        <a href="{{route('download.file',['file'=>'APL01 dan APL02 Skema 2.docx'])}}" class="menu-link active">
+                            <div>APL 02 Skema 2</div>
+                        </a>
+                        </li>
+                        <li class="menu-item {{ Route::is('download.*') ? 'active' : '' }}">
+                        <a href="{{route('download.file',['file'=>'APL01 dan APL02 Skema 3.docx'])}}" class="menu-link active">
+                                <div>APL 02 Skema 3</div>
+                            </a>
+                        </li>
+                </ul>
+        </li>
     
+@endif
 
     </ul>
 </aside>

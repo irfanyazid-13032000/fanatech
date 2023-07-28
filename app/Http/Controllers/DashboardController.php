@@ -2,28 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class PelatihanController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('pelatihan.index');
-    }
 
-    public function status($id)
-    {
-        $pelatihan = DB::table('pelatihan')
-            ->where('id',$id)
-            ->first();
+        $terkonfirmasi = User::where('status','terkonfirmasi')->get()->count();
+        $tertolak = User::where('status','tertolak')->get()->count();
 
+        $jumlahAsesi = $terkonfirmasi+$tertolak;
 
         
-        return view('pelatihan.status',compact('pelatihan'));
+
+        // dd($tertolak);
+
+        return view('dashboard.index',compact('terkonfirmasi','tertolak','jumlahAsesi'));
     }
 
     /**

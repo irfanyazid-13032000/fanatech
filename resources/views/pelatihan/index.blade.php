@@ -54,10 +54,13 @@
                         data:'status',
                         name:'status',
                         render:function (data,type,row,meta) {
+                            var baseUrl = "{{ route('pelatihan.status', ['id' => ':id']) }}";
+                            var statusUrl = baseUrl.replace(':id', row.id);
+
                             if (row.status == '') {
-                                return '<button class="btn btn-danger">Belum</button>'
+                                return `<a href="${statusUrl}" class="btn btn-danger">Belum</a>`;
                             }else{
-                                return '<button class="btn btn-success">Sudah</button>'
+                                return `<a href="${statusUrl}" class="btn btn-success">Sudah</a>`
                             }
                         }
                     },

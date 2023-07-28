@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PendidikanController extends Controller
 {
@@ -12,6 +13,19 @@ class PendidikanController extends Controller
     public function index()
     {
         return view('pendidikan.index');
+    }
+
+    public function status($id)
+    {
+        $pendidikan = DB::table('pendidikan')
+            ->where('id',$id)
+            ->first();
+           
+
+        // dd($pendidikan);
+
+        
+        return view('pendidikan.status',compact('pendidikan'));
     }
 
     /**

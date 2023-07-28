@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PersonaliaController extends Controller
 {
@@ -12,6 +13,15 @@ class PersonaliaController extends Controller
     public function index()
     {
         return view('personalia.index');
+    }
+
+    public function status($id)
+    {
+        $personalia = DB::table('personalia')
+        ->where('id',$id)
+        ->first();
+       
+        return view('personalia.status',compact('personalia'));
     }
 
     /**

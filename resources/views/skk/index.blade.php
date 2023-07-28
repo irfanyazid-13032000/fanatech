@@ -63,15 +63,14 @@
                         data:'status',
                         name:'status',
                         render:function (data,type,row,meta) {
-                            let id = row.id;
                             var baseUrl = "{{ route('skk.status', ['id' => ':id']) }}";
+                            var statusUrl = baseUrl.replace(':id', row.id);
 
                             if (row.status == '') {
-                                var statusUrl = baseUrl.replace(':id', row.id);
                                 return `<a href="${statusUrl}" class="btn btn-danger">Belum</a>`;
                                 // return row.id;
                             }else{
-                                return '<a class="btn btn-success">Sudah</a>'
+                                return `<a href="${statusUrl}" class="btn btn-success">Sudah</a>`
                             }
                         }
                     },
