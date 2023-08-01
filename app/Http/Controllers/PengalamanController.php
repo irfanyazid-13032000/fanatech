@@ -25,6 +25,41 @@ class PengalamanController extends Controller
         return view('pengalaman.status',compact('pengalaman'));
     }
 
+    public function lengkap($id)
+    {
+        DB::table('persyaratan_pengalaman')
+            ->where('id',$id)
+            ->update([
+            'status' => 'lengkap'
+        ]);
+    
+        return redirect()->route('pengalaman.status',['id'=>$id]);
+    }
+
+
+    public function belumLengkap($id)
+    {
+        DB::table('persyaratan_pengalaman')
+            ->where('id',$id)
+            ->update([
+            'status' => 'belum lengkap'
+        ]);
+    
+        return redirect()->route('pengalaman.status',['id'=>$id]);
+    }
+
+
+    public function tolak($id)
+    {
+        DB::table('persyaratan_pengalaman')
+            ->where('id',$id)
+            ->update([
+            'status' => 'tolak'
+        ]);
+    
+        return redirect()->route('pengalaman.status',['id'=>$id]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

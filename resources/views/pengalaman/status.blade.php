@@ -36,15 +36,15 @@
                         <td>{{$pengalaman->tgl_akhir}}</td>
                         <td>{{$pengalaman->nilai_proyek}}</td>
                         <td>{{$pengalaman->pengguna_jasa}}</td>
-                        <td>{{$pengalaman->status}}</td>
+                        <td><a href="" class="btn btn-primary">{{$pengalaman->status}}</a></td>
                   </tr>
                 </tbody>
             </table>
           </div>
         </div>
-        <a href="" class="btn btn-success">Lengkap</a>
-        <a href="" class="btn btn-info">Belum Lengkap</a>
-        <a href="" class="btn btn-danger">Tolak</a>
+        <a href="{{route('pengalaman.lengkap',['id'=>$pengalaman->id])}}" class="btn btn-success">Lengkap</a>
+        <a href="{{route('pengalaman.belum.lengkap',['id'=>$pengalaman->id])}}" class="btn btn-info">Belum Lengkap</a>
+        <a href="{{route('pengalaman.tolak',['id'=>$pengalaman->id])}}" class="btn btn-danger">Tolak</a>
 @endsection
 
 @push('addon-style')

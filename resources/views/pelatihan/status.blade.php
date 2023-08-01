@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('title', 'Data SKK')
+@section('title', 'Data Pelatihan')
 @section('content')
 
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span> Data SKK</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span> Data Pelatihan</h4>
     <div class="card">
         <div class="d-flex pe-4">
             <h5 class="card-header">SKK</h5>
@@ -31,7 +31,7 @@
                     <td>{{$pelatihan->nama_pelatihan_dan_sertifikat}}</td>
                     <td>{{$pelatihan->tgl_akhir}}</td>
                     <td>{{$pelatihan->jumlah_hari}}</td>
-                    <td>{{$pelatihan->status}}</td>
+                    <td><a href="" class="btn btn-primary">{{$pelatihan->status}}</a></td>
                    </tr>
                    
                   </tr>
@@ -39,9 +39,9 @@
             </table>
           </div>
         </div>
-        <a href="" class="btn btn-success">Lengkap</a>
-        <a href="" class="btn btn-info">Belum Lengkap</a>
-        <a href="" class="btn btn-danger">Tolak</a>
+        <a href="{{route('pelatihan.lengkap',['id'=>$pelatihan->id])}}" class="btn btn-success">Lengkap</a>
+        <a href="{{route('pelatihan.belum.lengkap',['id'=>$pelatihan->id])}}" class="btn btn-info">Belum Lengkap</a>
+        <a href="{{route('pelatihan.tolak',['id'=>$pelatihan->id])}}" class="btn btn-danger">Tolak</a>
 @endsection
 
 @push('addon-style')

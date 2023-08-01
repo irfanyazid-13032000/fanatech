@@ -36,15 +36,15 @@
                     <td>{{$pendidikan->alamat}}</td>
                     <td>{{$pendidikan->provinsi}}</td>
                     <td>{{$pendidikan->file_ijazah}}</td>
-                    <td>{{$pendidikan->status}}</td>
+                    <td><a href="" class="btn btn-primary">{{$pendidikan->status}}</a></td>
                   </tr>
                 </tbody>
             </table>
           </div>
         </div>
-        <a href="" class="btn btn-success">Lengkap</a>
-        <a href="" class="btn btn-info">Belum Lengkap</a>
-        <a href="" class="btn btn-danger">Tolak</a>
+        <a href="{{route('pendidikan.lengkap',['id'=>$pendidikan->id])}}" class="btn btn-success">Lengkap</a>
+        <a href="{{route('pendidikan.belum.lengkap',['id'=>$pendidikan->id])}}" class="btn btn-info">Belum Lengkap</a>
+        <a href="{{route('pendidikan.tolak',['id'=>$pendidikan->id])}}" class="btn btn-danger">Tolak</a>
 @endsection
 
 @push('addon-style')

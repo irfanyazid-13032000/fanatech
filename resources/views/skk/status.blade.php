@@ -38,17 +38,15 @@
                     <td>{{ $SKK->klasifikasi }}</td>
                     <td>{{ $SKK->sub_klasifikasi }}</td>
                     <td>{{ $SKK->jabatan_kerja }}</td>
-                    @if ($SKK->status == '')
-                    <td><a href="" class="btn btn-primary">submit</a></td>
-                    @endif
+                    <td><a href="" class="btn btn-primary">{{$SKK->status}}</a></td>
                   </tr>
                 </tbody>
             </table>
           </div>
         </div>
-        <a href="" class="btn btn-success">Lengkap</a>
-        <a href="" class="btn btn-info">Belum Lengkap</a>
-        <a href="" class="btn btn-danger">Tolak</a>
+        <a href="{{route('skk.lengkap',['id'=>$SKK->id])}}" class="btn btn-success">Lengkap</a>
+        <a href="{{route('skk.belum.lengkap',['id'=>$SKK->id])}}" class="btn btn-info">Belum Lengkap</a>
+        <a href="{{route('skk.tolak',['id'=>$SKK->id])}}" class="btn btn-danger">Tolak</a>
 @endsection
 
 @push('addon-style')

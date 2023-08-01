@@ -28,6 +28,39 @@ class PendidikanController extends Controller
         return view('pendidikan.status',compact('pendidikan'));
     }
 
+    public function lengkap($id)
+    {
+        DB::table('pendidikan')
+            ->where('id',$id)
+            ->update([
+            'status' => 'lengkap'
+        ]);
+    
+        return redirect()->route('pendidikan.status',['id'=>$id]);
+    }
+
+    public function belumLengkap($id)
+    {
+        DB::table('pendidikan')
+            ->where('id',$id)
+            ->update([
+            'status' => 'belum lengkap'
+        ]);
+    
+        return redirect()->route('pendidikan.status',['id'=>$id]);
+    }
+
+    public function tolak($id)
+    {
+        DB::table('pendidikan')
+            ->where('id',$id)
+            ->update([
+            'status' => 'tolak'
+        ]);
+    
+        return redirect()->route('pendidikan.status',['id'=>$id]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

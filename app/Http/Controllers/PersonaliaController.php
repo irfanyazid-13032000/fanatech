@@ -24,6 +24,39 @@ class PersonaliaController extends Controller
         return view('personalia.status',compact('personalia'));
     }
 
+    public function lengkap($id)
+    {
+        DB::table('personalia')
+            ->where('id',$id)
+            ->update([
+            'status' => 'lengkap'
+        ]);
+    
+        return redirect()->route('personalia.status',['id'=>$id]);
+    }
+
+    public function belumLengkap($id)
+    {
+        DB::table('personalia')
+            ->where('id',$id)
+            ->update([
+            'status' => 'belum lengkap'
+        ]);
+    
+        return redirect()->route('personalia.status',['id'=>$id]);
+    }
+
+    public function tolak($id)
+    {
+        DB::table('personalia')
+            ->where('id',$id)
+            ->update([
+            'status' => 'tolak'
+        ]);
+    
+        return redirect()->route('personalia.status',['id'=>$id]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

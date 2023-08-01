@@ -42,6 +42,41 @@ class SkkController extends Controller
         return view('skk.status',['SKK'=>$SKK]);
     }
 
+
+    public function lengkap($id)
+    {
+        DB::table('klasifikasi_kualifikasi')
+            ->where('id',$id)
+            ->update([
+                'status' => 'lengkap'
+            ]);
+        
+        return redirect()->route('skk.status',['id'=>$id]);
+    }
+
+    public function belumLengkap($id)
+    {
+        DB::table('klasifikasi_kualifikasi')
+            ->where('id',$id)
+            ->update([
+                'status' => 'belum lengkap'
+            ]);
+        
+        return redirect()->route('skk.status',['id'=>$id]);
+    }
+
+
+    public function tolak($id)
+    {
+        DB::table('klasifikasi_kualifikasi')
+            ->where('id',$id)
+            ->update([
+                'status' => 'tolak'
+            ]);
+        
+        return redirect()->route('skk.status',['id'=>$id]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

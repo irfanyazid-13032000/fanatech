@@ -32,7 +32,6 @@
                 </thead>
                 <tbody class="table-border-bottom-0">
                   <tr>
-
                         <td>{{$personalia->nik}}</td>
                         <td>{{$personalia->tempat_lahir}}</td>
                         <td>{{$personalia->email}}</td>
@@ -49,17 +48,15 @@
                         <td>{{$personalia->kabupaten}}</td>
                         <td>{{$personalia->file_npwp}}</td>
                         <td>{{$personalia->ktp}}</td>
-                        <td>{{$personalia->status}}</td>
-
-                   
+                        <td><a href="" class="btn btn-primary">{{$personalia->status}}</a></td>
                   </tr>
                 </tbody>
             </table>
           </div>
         </div>
-        <a href="" class="btn btn-success">Lengkap</a>
-        <a href="" class="btn btn-info">Belum Lengkap</a>
-        <a href="" class="btn btn-danger">Tolak</a>
+        <a href="{{route('personalia.lengkap',['id'=>$personalia->id])}}" class="btn btn-success">Lengkap</a>
+        <a href="{{route('personalia.belum.lengkap',['id'=>$personalia->id])}}" class="btn btn-info">Belum Lengkap</a>
+        <a href="{{route('personalia.tolak',['id'=>$personalia->id])}}" class="btn btn-danger">Tolak</a>
 @endsection
 
 @push('addon-style')
