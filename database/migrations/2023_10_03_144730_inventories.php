@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('peserta_tes_kompetensi', function (Blueprint $table) {
+        Schema::create('inventories', function (Blueprint $table) {
             $table->id();
-            $table->string('no_surat');
-            $table->string('nama');
-            $table->string('skema');
-            $table->integer('hasil');
+            $table->string('code');
+            $table->string('name');
+            $table->string('price');
+            $table->integer('stock');
             $table->rememberToken();
             $table->timestamps();
         });
