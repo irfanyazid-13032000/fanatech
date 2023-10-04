@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>@yield('title') | SKK LSP</title>
+    <title>@yield('title') | Fanatech</title>
 
     <meta name="description" content="" />
 
@@ -73,6 +73,9 @@
     <!-- Core scripts -->
     @include('includes.core-script')
     @stack('addon-script')
+
+    @include('sweetalert::alert')
+
 </body>
 
 </html>

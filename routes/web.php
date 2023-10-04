@@ -14,6 +14,7 @@ use App\Http\Controllers\LampiranController;
 use App\Http\Controllers\UndanganController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatatableController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PelatihanController;
 use App\Http\Controllers\PendidikanController;
 use App\Http\Controllers\PengalamanController;
@@ -31,6 +32,12 @@ use App\Http\Controllers\DownloadAPLController;
 |
 */
 
+use App\DataTables\InventoriesDataTable;
+ 
+Route::get('inventory-datatable', function(InventoriesDataTable $dataTable) {
+    return $dataTable->render('inventory.datatable');
+});
+
 Route::get('/', [DashboardController::class,'index'])->middleware('auth');
 
 
@@ -41,6 +48,11 @@ Route::get('/skk-lengkap/{id}', [SkkController::class, 'lengkap'])->name('skk.le
 Route::get('/skk-belum-lengkap/{id}', [SkkController::class, 'belumLengkap'])->name('skk.belum.lengkap')->middleware('admin');
 Route::get('/skk-tolak/{id}', [SkkController::class, 'tolak'])->name('skk.tolak')->middleware('admin');
 
+
+Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index')->middleware('admin');
+Route::get('/inventory/create', [InventoryController::class, 'create'])->name('inventory.create')->middleware('admin');
+Route::post('/inventory/store', [InventoryController::class, 'store'])->name('inventory.store')->middleware('admin');
+Route::get('/inventory/{id}/edit', [InventoryController::class, 'edit'])->name('inventory.edit')->middleware('admin');
 
 // pelatihan
 Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan.index')->middleware('admin');
@@ -72,6 +84,7 @@ Route::get('/pengalaman-tolak/{id}', [PengalamanController::class, 'tolak'])->na
 
 // datatable TKK
 Route::get('/data-skk', [DatatableController::class, 'dataSKK'])->name('data-skk');
+Route::get('/data-inventory', [DatatableController::class, 'dataInventory'])->name('data-inventory');
 Route::get('/data-pelatihan', [DatatableController::class, 'dataPelatihan'])->name('data-pelatihan');
 Route::get('/data-pendidikan', [DatatableController::class, 'dataPendidikan'])->name('data-pendidikan');
 Route::get('/data-personalia', [DatatableController::class, 'dataPersonalia'])->name('data-personalia');

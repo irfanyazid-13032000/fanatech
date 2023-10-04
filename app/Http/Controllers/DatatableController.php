@@ -14,6 +14,19 @@ class DatatableController extends Controller
 
         return datatables()->of($allskk)->toJson();
     }
+
+    public function dataInventory()
+    {
+        $inventories = DB::table('inventories')->get();
+
+        return datatables()->of($inventories)->toJson()->builder()
+        ->columns($this->getColumns())
+        ->parameters([
+            'buttons' => ['excel'],
+        ]);
+    }
+    
+    
     public function dataPelatihan()
     {
         $pelatihan = DB::table('pelatihan')->get();

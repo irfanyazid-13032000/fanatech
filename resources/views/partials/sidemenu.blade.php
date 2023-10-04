@@ -2,14 +2,7 @@
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="/" class="app-brand-link">
             <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" width="100">
-            <span class="menu-text fw-bolder fs-4 ms-2">Aptakindo</span>
-        </a>
-
-        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-            <i class="bx bx-chevron-left bx-sm align-middle"></i>
-        </a>
     </div>
 
     <div class="menu-inner-shadow"></div>
@@ -29,39 +22,17 @@
                 class="menu-item {{ Route::is('skk.*') || Route::is('pelatihan.*') || Route::is('pendidikan.*') || Route::is('personalia.*') || Route::is('pengalaman.*') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bxs-user-check"></i>
-                    <div data-i18n="Layouts">SKK </div>
+                    <div data-i18n="Layouts">Inventories </div>
                 </a>
 
                 <ul class="menu-sub">
                    
-                        <li class="menu-item {{ Route::is('skk.*') ? 'active' : '' }}">
-                            <a href="{{ route('skk.index') }}" class="menu-link active">
-                                <div>Klasifikasi Kualifikasi</div>
+                        <li class="menu-item {{ Route::is('inventory.*') ? 'active' : '' }}">
+                            <a href="{{ route('inventory.index') }}" class="menu-link active">
+                                <div>Inventory</div>
                             </a>
                         </li>
-                        <li class="menu-item {{ Route::is('pelatihan.*') ? 'active' : '' }}">
-                            <a href="{{ route('pelatihan.index') }}" class="menu-link active">
-                                <div>Pelatihan</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Route::is('pendidikan.*') ? 'active' : '' }}">
-                            <a href="{{ route('pendidikan.index') }}" class="menu-link active">
-                                <div>Pendidikan</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Route::is('personalia.*') ? 'active' : '' }}">
-                            <a href="{{ route('personalia.index') }}" class="menu-link active">
-                                <div>Personalia</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Route::is('pengalaman.*') ? 'active' : '' }}">
-                            <a href="{{ route('pengalaman.index') }}" class="menu-link active">
-                                <div>Pengalaman</div>
-                            </a>
-                        </li>
-                    
                       
-                    
                    
                 </ul>
             </li>

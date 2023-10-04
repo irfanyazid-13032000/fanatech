@@ -5,7 +5,7 @@
             <script>
                 document.write(new Date().getFullYear());
             </script>
-            , SKK LSP
+            , Fanatech
         </div>
     </div>
 </footer>
