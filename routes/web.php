@@ -6,6 +6,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\SkkController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\FillPDFController;
@@ -50,33 +51,9 @@ Route::post('/inventory/store', [InventoryController::class, 'store'])->name('in
 Route::get('/inventory/{id}/edit', [InventoryController::class, 'edit'])->name('inventory.edit')->middleware('admin');
 Route::get('/inventory/{id}/delete', [InventoryController::class, 'destroy'])->name('inventory.delete')->middleware('admin');
 
-// pelatihan
-Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan.index')->middleware('admin');
-Route::get('/status-pelatihan/{id}', [PelatihanController::class, 'status'])->name('pelatihan.status')->middleware('admin');
-Route::get('/pelatihan-lengkap/{id}', [PelatihanController::class, 'lengkap'])->name('pelatihan.lengkap')->middleware('admin');
-Route::get('/pelatihan-belum-lengkap/{id}', [PelatihanController::class, 'belumLengkap'])->name('pelatihan.belum.lengkap')->middleware('admin');
-Route::get('/pelatihan-tolak/{id}', [PelatihanController::class, 'tolak'])->name('pelatihan.tolak')->middleware('admin');
+Route::get('/sales', [SaleController::class, 'index'])->name('sale.index')->middleware('admin');
+Route::get('/sales/create', [SaleController::class, 'create'])->name('sale.create')->middleware('admin');
 
-// pendidikan
-Route::get('/pendidikan', [PendidikanController::class, 'index'])->name('pendidikan.index')->middleware('admin');
-Route::get('/status-pendidikan/{id}', [PendidikanController::class, 'status'])->name('pendidikan.status')->middleware('admin');
-Route::get('/pendidikan-lengkap/{id}', [PendidikanController::class, 'lengkap'])->name('pendidikan.lengkap')->middleware('admin');
-Route::get('/pendidikan-belum-lengkap/{id}', [PendidikanController::class, 'belumLengkap'])->name('pendidikan.belum.lengkap')->middleware('admin');
-Route::get('/pendidikan-tolak/{id}', [PendidikanController::class, 'tolak'])->name('pendidikan.tolak')->middleware('admin');
-
-// personalia
-Route::get('/personalia', [PersonaliaController::class, 'index'])->name('personalia.index')->middleware('admin');
-Route::get('/status-personalia/{id}', [PersonaliaController::class, 'status'])->name('personalia.status')->middleware('admin');
-Route::get('/personalia-lengkap/{id}', [PersonaliaController::class, 'lengkap'])->name('personalia.lengkap')->middleware('admin');
-Route::get('/personalia-belum-lengkap/{id}', [PersonaliaController::class, 'belumLengkap'])->name('personalia.belum.lengkap')->middleware('admin');
-Route::get('/personalia-tolak/{id}', [PersonaliaController::class, 'tolak'])->name('personalia.tolak')->middleware('admin');
-
-// pengalaman
-Route::get('/pengalaman', [PengalamanController::class, 'index'])->name('pengalaman.index')->middleware('admin');
-Route::get('/status-pengalaman/{id}', [PengalamanController::class, 'status'])->name('pengalaman.status')->middleware('admin');
-Route::get('/pengalaman-lengkap/{id}', [PengalamanController::class, 'lengkap'])->name('pengalaman.lengkap')->middleware('admin');
-Route::get('/pengalaman-belum-lengkap/{id}', [PengalamanController::class, 'belumLengkap'])->name('pengalaman.belum.lengkap')->middleware('admin');
-Route::get('/pengalaman-tolak/{id}', [PengalamanController::class, 'tolak'])->name('pengalaman.tolak')->middleware('admin');
 
 // datatable TKK
 Route::get('/data-skk', [DatatableController::class, 'dataSKK'])->name('data-skk');
