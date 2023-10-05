@@ -32,11 +32,6 @@ use App\Http\Controllers\DownloadAPLController;
 |
 */
 
-use App\DataTables\InventoriesDataTable;
- 
-Route::get('inventory-datatable', function(InventoriesDataTable $dataTable) {
-    return $dataTable->render('inventory.datatable');
-});
 
 Route::get('/', [DashboardController::class,'index'])->middleware('auth');
 
@@ -53,6 +48,7 @@ Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory
 Route::get('/inventory/create', [InventoryController::class, 'create'])->name('inventory.create')->middleware('admin');
 Route::post('/inventory/store', [InventoryController::class, 'store'])->name('inventory.store')->middleware('admin');
 Route::get('/inventory/{id}/edit', [InventoryController::class, 'edit'])->name('inventory.edit')->middleware('admin');
+Route::get('/inventory/{id}/delete', [InventoryController::class, 'destroy'])->name('inventory.delete')->middleware('admin');
 
 // pelatihan
 Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan.index')->middleware('admin');

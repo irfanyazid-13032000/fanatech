@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\DataTables\InventoriesDataTable;
+ 
 
 class InventoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(InventoriesDataTable $dataTable)
     {
-        return view("inventory.index");
+        return $dataTable->render('inventory.datatable');
     }
 
     /**
@@ -70,6 +72,11 @@ class InventoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Inventory::find($id)->delete();
+
+        Alert::success("berhasil menghapus data","redirect ke halaman inventory index");
+
+        
+        return redirect()->route('inventory.index');
     }
 }

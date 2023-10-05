@@ -22,7 +22,24 @@ class InventoriesDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'inventories.action')
+            ->addColumn('action', function ($row) {
+                $editClass = "btn btn-primary";
+                $deleteClass = "btn btn-danger";
+
+
+                $editUrl = route('inventory.edit', ['id' => $row->id]);
+                $deleteUrl = route('inventory.delete', ['id' => $row->id]);
+
+
+                $editLink = "<a href=\"$editUrl\" class=\"$editClass\">edit</a>" ;
+                $deleteLink = "<a href=\"$deleteUrl\" class=\"$deleteClass\" onclick=\"return showDeleteConfirmation()\">delete</a>";
+                return $editLink . $deleteLink;
+            })
+            ->addColumn('price',function($row){
+                return "Rp." . number_format($row->price);
+            })
+            ->addIndexColumn()
+
             ->setRowId('id');
     }
 
@@ -43,7 +60,7 @@ class InventoriesDataTable extends DataTable
                     ->setTableId('inventories-table')
                     ->columns($this->getColumns())
                     ->parameters([
-                        'buttons'      => ['export', 'print','excel'],
+                        'buttons'=> ['export', 'print','excel'],
                     ])
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -62,11 +79,11 @@ class InventoriesDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(true)
-                  ->printable(true)
-                  ->width(60)
-                  ->addClass('text-center'),
+            Column::make('DT_RowIndex')
+                    ->title('No')
+                    ->addClass('text-center')
+                    ->orderable(false)
+                    ->searchable(false),
             Column::make('code')
             ->exportable(true)
                     ->addClass('text-center'),
@@ -76,6 +93,15 @@ class InventoriesDataTable extends DataTable
                     ->addClass('text-center'),
             Column::make('stock')
                     ->addClass('text-center'),
+            Column::make('action')
+                    ->addClass('text-center')
+                    ->searchable(false)
+                    ->orderable(false)
+                    ->exportRender(function(){return 'Inactive';})
+                    ->exportable(false)
+                    ->printable(false)
+                   
+            
         ];
     }
 
@@ -86,4 +112,6 @@ class InventoriesDataTable extends DataTable
     {
         return 'Inventories_' . date('YmdHis');
     }
+
+    
 }

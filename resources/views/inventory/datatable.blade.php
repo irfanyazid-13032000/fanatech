@@ -10,9 +10,11 @@
             <div class="card-header">Inventories</div>
             <div class="card-body">
                 {{ $dataTable->table() }}
+                <a href="{{route('inventory.create')}}" class="btn btn-primary">add</a>
             </div>
         </div>
     </div>
+
 @endsection
 
 @push('addon-style')
@@ -32,6 +34,27 @@
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+
+    <script>
+       function showDeleteConfirmation() {
+        Swal.fire({
+            title: 'Apa kamu yakin?',
+            text: 'Tindakan ini tidak dapat dibatalkan!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Tidak, batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Lakukan penghapusan di sini jika pengguna menekan "Ya, hapus!"
+                window.location.href = ""; // Ganti dengan URL penghapusan sesuai kebutuhan
+            }
+        });
+        return false; // Mencegah tindakan standar dari tautan
+}
+    </script>
 @endpush
