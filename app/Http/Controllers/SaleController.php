@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sale;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
 use App\DataTables\SalesDataTable;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SaleController extends Controller
 {
@@ -22,7 +25,7 @@ class SaleController extends Controller
     public function create()
     {
         $inventories = Inventory::all();
-        $lastId = Inventory::orderBy('id','desc')->first();
+        $lastId = Sale::orderBy('id','desc')->first();
         return view('sale.create',compact('inventories','lastId'));
     }
 
@@ -43,7 +46,31 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+
+        // return $request;
+        Sale::create([
+            'number' => $request->number,
+            'user_id' => session('user_id'),
+            'date' => date('Y-m-d')
+        ]);
+
+        $salesId = Sale::orderBy('id','desc')->first();
+
+        foreach ($request->sales as $sale) {
+
+            DB::table('sales_details')->insert([
+                'sales_id' => $salesId->id,
+                'inventory_id' => $sale['inventory_id'],
+                'qty' => $sale['qty'],
+                'price' => $sale['price'],
+            ]);
+         
+        }
+
+
+        Alert::success("berhasil menambahkan data","redirect ke halaman sale index");
+
+        return redirect()->route('sale.index');
     }
 
     /**
@@ -51,7 +78,7 @@ class SaleController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return $id;
     }
 
     /**
@@ -75,6 +102,10 @@ class SaleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Sale::find($id)->delete();
+
+        Alert::success("berhasil menghapus data","redirect ke halaman sale index");
+
+        return redirect()->route('sale.index');
     }
 }

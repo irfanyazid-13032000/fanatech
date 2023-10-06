@@ -54,6 +54,8 @@ Route::get('/inventory/{id}/delete', [InventoryController::class, 'destroy'])->n
 Route::get('/sales', [SaleController::class, 'index'])->name('sale.index')->middleware('admin');
 Route::get('/sales/create', [SaleController::class, 'create'])->name('sale.create')->middleware('admin');
 Route::post('/sales/store', [SaleController::class, 'store'])->name('sale.store')->middleware('admin');
+Route::get('/sales/{id}/delete', [SaleController::class, 'destroy'])->name('sale.delete')->middleware('admin');
+Route::get('/sales/{id}/detail', [SaleController::class, 'show'])->name('sale.detail')->middleware('admin');
 Route::get('/sales/table-awal/{i}', [SaleController::class, 'tableAwal'])->name('sale.table.awal')->middleware('admin');
 Route::get('/sales/table-tambahan/{i}', [SaleController::class, 'tableTambahan'])->name('sale.table.tambahan')->middleware('admin');
 

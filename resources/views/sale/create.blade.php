@@ -35,7 +35,7 @@
                         
                         <div class="d-flex justify-content-end mt-2">
                             <button class="btn btn-primary" type="submit">Add</button>
-                            <a href="{{ route('inventory.index') }}" class="btn btn-danger ms-3">Back</a>
+                            <a href="{{ route('sale.index') }}" class="btn btn-danger ms-3">Back</a>
                         </div>
                     </form>
                 </div>
