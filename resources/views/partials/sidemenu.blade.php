@@ -19,7 +19,7 @@
         <!-- Layouts -->
         @if (Auth::user()->role === 'Admin')
             <li
-                class="menu-item {{ Route::is('skk.*') || Route::is('pelatihan.*') || Route::is('pendidikan.*') || Route::is('personalia.*') || Route::is('pengalaman.*') ? 'active open' : '' }}">
+                class="menu-item {{ Route::is('inventory.*') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bxs-user-check"></i>
                     <div data-i18n="Layouts">Inventories </div>
@@ -30,6 +30,26 @@
                         <li class="menu-item {{ Route::is('inventory.*') ? 'active' : '' }}">
                             <a href="{{ route('inventory.index') }}" class="menu-link active">
                                 <div>Inventory</div>
+                            </a>
+                        </li>
+                      
+                   
+                </ul>
+            </li>
+
+
+            <li
+                class="menu-item {{ Route::is('sale.*') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bxs-user-check"></i>
+                    <div data-i18n="Layouts">Sale </div>
+                </a>
+
+                <ul class="menu-sub">
+                   
+                        <li class="menu-item {{ Route::is('sale.*') ? 'active' : '' }}">
+                            <a href="{{ route('sale.index') }}" class="menu-link active">
+                                <div>Sales</div>
                             </a>
                         </li>
                       

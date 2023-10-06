@@ -17,25 +17,20 @@
             <div class="card mb-4">
                 <h5 class="card-header">Tambah Data Sale</h5>
                 <div class="card-body">
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('sale.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
+
                         <div class="mb-3">
-                            <label for="inventory_id" class="form-label">Inventory</label>
-                            <input type="text" name="inventory_id" class="form-control" id="inventory_id" value="{{ old('inventory_id') }}" required>
-                            @error('inventory_id')
+                            <label for="number" class="form-label">number</label>
+                            <input type="text" class="form-control" id="number" name="number"
+                                value="{{"Sale-" . date('Y-m-d') . "-" . $lastId->id + 1}}" readonly>
+                            @error('number')
                                 <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
                             @enderror
                         </div>
-                        
-                        
-                        <div class="mb-3">
-                            <label for="qty" class="form-label">qty</label>
-                            <input type="number" class="form-control" id="qty" name="qty"
-                                value="{{ old('qty') }}" required>
-                            @error('qty')
-                                <p style="color: rgb(253, 21, 21)">{{ $message }}</p>
-                            @enderror
-                        </div>
+
+                        <div id="div-sales-table"></div>
+                                               
                         
                         
                         <div class="d-flex justify-content-end mt-2">
@@ -48,6 +43,73 @@
         </div>
     </div>
 @endsection
+
+@push('addon-script')
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>  
+
+<script>
+
+    $('#inventory_id').select2({})
+
+    let i = 0;
+    
+    function loadTableAwalSale() {
+        var routeUrl = "{{ route('sale.table.awal',':i') }}";
+            routeUrl = routeUrl.replace(':i', i);
+
+            $.ajax({
+                url: routeUrl,
+                method: 'GET',
+                success: function(res) {
+                  $('#div-sales-table').html(res)
+                  $('#inventory_id' + i).select2()
+                  addRowSale()
+                }
+            });
+    }
+
+    loadTableAwalSale()
+
+
+    function addRowSale() {
+        $('#add-row').on('click',function (params) {
+            ++i
+
+
+            var routeUrl = "{{ route('sale.table.tambahan',':i') }}";
+            routeUrl = routeUrl.replace(':i', i);
+
+            $.ajax({
+                url: routeUrl,
+                method: 'GET',
+                success: function(res) {
+                  $('#table-sales').append(res)
+                  $('#inventory_id' + i).select2()
+                  deleteRow(i)
+                }
+            });
+
+            
+        })
+        
+    }
+
+
+    function deleteRow(i) {
+    $(".delete-row").click(function() {
+        var row = $(this).closest("tr");
+        row.remove();
+      });
+  }
+
+
+
+</script>
+
+    
+@endpush
 
 
 
