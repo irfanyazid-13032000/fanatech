@@ -2,27 +2,14 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PdfController;
-use App\Http\Controllers\SkkController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AsesorController;
-use App\Http\Controllers\FillPDFController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\LampiranController;
 use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\UndanganController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatatableController;
 use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\PelatihanController;
-use App\Http\Controllers\PendidikanController;
-use App\Http\Controllers\PengalamanController;
-use App\Http\Controllers\PersonaliaController;
-use App\Http\Controllers\BeritaAcaraController;
-use App\Http\Controllers\DownloadAPLController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,117 +25,57 @@ use App\Http\Controllers\DownloadAPLController;
 Route::get('/', [DashboardController::class,'index'])->middleware('auth');
 
 
-// skk
-Route::get('/skk', [SkkController::class, 'index'])->name('skk.index')->middleware('admin');
-Route::get('/status-skk/{id}', [SkkController::class, 'status'])->name('skk.status')->middleware('admin');
-Route::get('/skk-lengkap/{id}', [SkkController::class, 'lengkap'])->name('skk.lengkap')->middleware('admin');
-Route::get('/skk-belum-lengkap/{id}', [SkkController::class, 'belumLengkap'])->name('skk.belum.lengkap')->middleware('admin');
-Route::get('/skk-tolak/{id}', [SkkController::class, 'tolak'])->name('skk.tolak')->middleware('admin');
+Route::middleware('admin')->group(function(){
 
 
-Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index')->middleware('admin');
-Route::get('/inventory/create', [InventoryController::class, 'create'])->name('inventory.create')->middleware('admin');
-Route::post('/inventory/store', [InventoryController::class, 'store'])->name('inventory.store')->middleware('admin');
-Route::get('/inventory/{id}/edit', [InventoryController::class, 'edit'])->name('inventory.edit')->middleware('admin');
-Route::get('/inventory/{id}/delete', [InventoryController::class, 'destroy'])->name('inventory.delete')->middleware('admin');
-Route::post('/inventory/{id}/update', [InventoryController::class, 'update'])->name('inventory.update')->middleware('admin');
+  Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
+  Route::get('/inventory/create', [InventoryController::class, 'create'])->name('inventory.create');
+  Route::post('/inventory/store', [InventoryController::class, 'store'])->name('inventory.store');
+  Route::get('/inventory/{id}/edit', [InventoryController::class, 'edit'])->name('inventory.edit');
+  Route::get('/inventory/{id}/delete', [InventoryController::class, 'destroy'])->name('inventory.delete');
+  Route::post('/inventory/{id}/update', [InventoryController::class, 'update'])->name('inventory.update');
 
-Route::get('/sales', [SaleController::class, 'index'])->name('sale.index')->middleware('admin');
-Route::get('/sales/create', [SaleController::class, 'create'])->name('sale.create')->middleware('admin');
-Route::post('/sales/store', [SaleController::class, 'store'])->name('sale.store')->middleware('admin');
-Route::get('/sales/{id}/delete', [SaleController::class, 'destroy'])->name('sale.delete')->middleware('admin');
-Route::get('/sales/{id}/detail', [SaleController::class, 'show'])->name('sale.detail')->middleware('admin');
-Route::get('/sales/table-awal/{i}', [SaleController::class, 'tableAwal'])->name('sale.table.awal')->middleware('admin');
-Route::get('/sales/table-tambahan/{i}', [SaleController::class, 'tableTambahan'])->name('sale.table.tambahan')->middleware('admin');
+});
 
 
-Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase.index')->middleware('admin');
-Route::get('/purchase/create', [PurchaseController::class, 'create'])->name('purchase.create')->middleware('admin');
-Route::post('/purchase/store', [PurchaseController::class, 'store'])->name('purchase.store')->middleware('admin');
-Route::get('/purchase/{id}/detail', [PurchaseController::class, 'show'])->name('purchase.detail')->middleware('admin');
-Route::get('/purchase/{id}/delete', [PurchaseController::class, 'destroy'])->name('purchase.delete')->middleware('admin');
-Route::get('/purchase/table-awal/{i}', [PurchaseController::class, 'tableAwal'])->name('purchase.table.awal')->middleware('admin');
-Route::get('/purchase/table-tambahan/{i}', [PurchaseController::class, 'tableTambahan'])->name('purchase.table.tambahan')->middleware('admin');
 
-// datatable TKK
-Route::get('/data-skk', [DatatableController::class, 'dataSKK'])->name('data-skk');
+Route::middleware('AdminSales')->group(function(){
+
+Route::get('/sales', [SaleController::class, 'index'])->name('sale.index');
+Route::get('/sales/create', [SaleController::class, 'create'])->name('sale.create');
+Route::post('/sales/store', [SaleController::class, 'store'])->name('sale.store');
+Route::get('/sales/{id}/delete', [SaleController::class, 'destroy'])->name('sale.delete');
+Route::get('/sales/{id}/detail', [SaleController::class, 'show'])->name('sale.detail');
+Route::get('/sales/table-awal/{i}', [SaleController::class, 'tableAwal'])->name('sale.table.awal');
+Route::get('/sales/table-tambahan/{i}', [SaleController::class, 'tableTambahan'])->name('sale.table.tambahan');
+
+});
+
+
+
+Route::middleware('AdminPurchase')->group(function(){
+
+
+Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase.index');
+Route::get('/purchase/create', [PurchaseController::class, 'create'])->name('purchase.create');
+Route::post('/purchase/store', [PurchaseController::class, 'store'])->name('purchase.store');
+Route::get('/purchase/{id}/detail', [PurchaseController::class, 'show'])->name('purchase.detail');
+Route::get('/purchase/{id}/delete', [PurchaseController::class, 'destroy'])->name('purchase.delete');
+Route::get('/purchase/table-awal/{i}', [PurchaseController::class, 'tableAwal'])->name('purchase.table.awal');
+Route::get('/purchase/table-tambahan/{i}', [PurchaseController::class, 'tableTambahan'])->name('purchase.table.tambahan');
+
+});
+
+
+
+// datatable
 Route::get('/data-sale/{id}', [DatatableController::class, 'dataSale'])->name('data-sale');
 Route::get('/data-purchase/{id}', [DatatableController::class, 'dataPurchase'])->name('data-purchase');
 Route::get('/data-inventory', [DatatableController::class, 'dataInventory'])->name('data-inventory');
-Route::get('/data-pelatihan', [DatatableController::class, 'dataPelatihan'])->name('data-pelatihan');
-Route::get('/data-pendidikan', [DatatableController::class, 'dataPendidikan'])->name('data-pendidikan');
-Route::get('/data-personalia', [DatatableController::class, 'dataPersonalia'])->name('data-personalia');
-Route::get('/data-pengalaman', [DatatableController::class, 'dataPengalaman'])->name('data-pengalaman');
-
-
-// asesor
-Route::get('/asesor', [AsesorController::class, 'index'])->name('asesor.index')->middleware('admin');
-Route::get('/asesor/tambah', [AsesorController::class, 'create'])->name('asesor.tambah')->middleware('admin');
-Route::post('/asesor/simpan', [AsesorController::class, 'store'])->name('asesor.simpan')->middleware('admin');
-Route::get('/asesor/anggota/{no_surat}', [AsesorController::class, 'anggota'])->name('anggota.asesor')->middleware('admin');
-Route::post('/asesor/anggota/{no_surat}', [AsesorController::class, 'tambahAnggota'])->name('anggota.tambah')->middleware('admin');
-Route::get('/asesor/export/{no_surat}', [AsesorController::class, 'exportSurat'])->name('export.surat')->middleware('admin');
-Route::get('/asesor/hapus/anggota/{id}/{no_surat}', [AsesorController::class, 'hapusAnggota'])->name('anggota.hapus')->middleware('admin');
-
-
-
-// datatable asesor
-Route::get('/data-asesor', [DatatableController::class, 'dataAsesor'])->name('data-asesor');
-
-
-
-// undangan
-Route::get('/undangan', [UndanganController::class, 'index'])->name('undangan.index')->middleware('admin');
-Route::get('/undangan/delete/{id}', [UndanganController::class, 'destroy'])->name('undangan.destroy')->middleware('admin');
-Route::get('/undangan/export/{id}', [UndanganController::class, 'export'])->name('undangan.export')->middleware('admin');
-
-
-// datatable undangan
-Route::get('/data-undangan', [DatatableController::class, 'dataUndangan'])->name('data-undangan');
-
-
-
-// berita acara
-Route::get('/berita-acara', [BeritaAcaraController::class, 'index'])->name('berita.index')->middleware('admin');
-Route::get('/berita-acara/destroy/{no_surat}', [BeritaAcaraController::class, 'destroy'])->name('berita.destroy')->middleware('admin');
-Route::get('/berita-acara/export/{no_surat}', [BeritaAcaraController::class, 'export'])->name('berita.export')->middleware('admin');
-Route::get('/berita-acara/peserta/{no_surat}', [BeritaAcaraController::class, 'peserta'])->name('berita.peserta')->middleware('admin');
-Route::get('/berita-acara/hapus/peserta/{id}/{no_surat}', [BeritaAcaraController::class, 'hapusPeserta'])->name('peserta.hapus')->middleware('admin');
-Route::post('/berita-acara/tambah/peserta/{no_surat}', [BeritaAcaraController::class, 'tambahPeserta'])->name('peserta.tambah')->middleware('admin');
-
-// datatable berita acara
-Route::get('/data-berita-acara', [DatatableController::class, 'dataBeritaAcara'])->name('data-berita-acara');
-
-
-
-// lampiran
-Route::get('/lampiran', [LampiranController::class, 'index'])->name('lampiran.index')->middleware('admin');
-Route::get('/lampiran/peserta/{no_surat}', [LampiranController::class, 'peserta'])->name('lampiran.peserta')->middleware('admin');
-Route::post('/lampiran/tambah/peserta/{no_surat}', [LampiranController::class, 'pesertaTambah'])->name('lampiran.peserta.tambah')->middleware('admin');
-Route::get('/lampiran/peserta/hapus/{no_surat}/{id}', [LampiranController::class, 'pesertaHapus'])->name('lampiran.peserta.hapus')->middleware('admin');
-Route::get('/lampiran/export/{no_surat}', [LampiranController::class, 'export'])->name('lampiran.export')->middleware('admin');
-
-// datatable lampiran
-Route::get('/data-lampiran', [DatatableController::class, 'dataLampiran'])->name('data-lampiran');
 
 
 
 
-
-// payment
-Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice.index')->middleware('admin');
-Route::get('/confirm-payment', [InvoiceController::class, 'confirmPayment'])->name('confirm.index')->middleware('admin');
-
-
-// datatable payment
-Route::get('/data-invoice', [DatatableController::class, 'dataInvoice'])->name('data-invoice');
-Route::get('/data-confirm', [DatatableController::class, 'dataConfirm'])->name('data-confirm');
-
-
-// 
-Route::get('/download/{file}', [DownloadAPLController::class, 'download'])->name('download.file')->middleware('admin');
-
- 
 
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('admin');

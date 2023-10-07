@@ -21,23 +21,40 @@ class SalesDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return (new EloquentDataTable($query))
-        ->addColumn('action', function ($row) {
-            $detailClass = "btn btn-primary";
-            $deleteClass = "btn btn-danger";
 
-
-            $detailUrl = route('sale.detail', ['id' => $row->id]);
-            $deleteUrl = route('sale.delete', ['id' => $row->id]);
-
-
-            $detailLink = "<a href=\"$detailUrl\" class=\"$detailClass\">detail</a>" ;
-            $deleteLink = "<a href=\"$deleteUrl\" class=\"$deleteClass\">delete</a>" ;
-            return $detailLink ." ". $deleteLink;
-        })
-
-        ->addIndexColumn()
-        ->setRowId('id');
+        if (auth()->user()->role !== 'manager') {
+            return (new EloquentDataTable($query))
+            ->addColumn('action', function ($row) {
+                $detailClass = "btn btn-primary";
+                $deleteClass = "btn btn-danger";
+    
+    
+                $detailUrl = route('sale.detail', ['id' => $row->id]);
+                $deleteUrl = route('sale.delete', ['id' => $row->id]);
+    
+    
+                $detailLink = "<a href=\"$detailUrl\" class=\"$detailClass\">detail</a>" ;
+                $deleteLink = "<a href=\"$deleteUrl\" class=\"$deleteClass\">delete</a>" ;
+                return $detailLink ." ". $deleteLink;
+            })
+    
+            ->addIndexColumn()
+            ->setRowId('id');
+        }else {
+            return (new EloquentDataTable($query))
+            ->addColumn('action', function ($row) {
+                $detailClass = "btn btn-primary";
+    
+    
+                $detailUrl = route('sale.detail', ['id' => $row->id]);
+    
+    
+                $detailLink = "<a href=\"$detailUrl\" class=\"$detailClass\">detail</a>" ;
+                return $detailLink;
+            })
+            ->addIndexColumn()
+            ->setRowId('id');
+        }
     }
 
     /**
@@ -72,19 +89,19 @@ class SalesDataTable extends DataTable
      */
     public function getColumns(): array
     {
-        return [
-            Column::make('DT_RowIndex')
-                    ->title('No')
-                    ->addClass('text-center')
-                    ->orderable(false)
-                    ->searchable(false),
-            Column::make('number'),
-            Column::make('date'),
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->addClass('text-center'),
-        ];
+            return [
+                Column::make('DT_RowIndex')
+                        ->title('No')
+                        ->addClass('text-center')
+                        ->orderable(false)
+                        ->searchable(false),
+                Column::make('number'),
+                Column::make('date'),
+                Column::computed('action')
+                      ->exportable(false)
+                      ->printable(false)
+                      ->addClass('text-center'),
+            ];
     }
 
     /**

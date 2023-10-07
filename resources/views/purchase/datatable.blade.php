@@ -7,7 +7,9 @@
             <div class="card-header">Purchase</div>
             <div class="card-body">
                 {{ $dataTable->table() }}
+                @if (auth()->user()->role !== 'manager')
                 <a href="{{route('purchase.create')}}" class="btn btn-primary">add</a>
+                @endif
             </div>
         </div>
     </div>

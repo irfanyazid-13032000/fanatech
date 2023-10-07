@@ -51,6 +51,15 @@ class UserSeeder extends Seeder
                 'remember_token' => 'null',
                 'created_at' => now(),
             ],
+            [
+                'id' => '5',
+                'name' => 'Doni',
+                'email' => 'doni@gmail.com',
+                'password' => bcrypt('doni123'),
+                'role' => 'manager',
+                'remember_token' => 'null',
+                'created_at' => now(),
+            ],
            
         ];
 

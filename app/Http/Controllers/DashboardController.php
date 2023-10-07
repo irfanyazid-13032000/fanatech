@@ -13,16 +13,11 @@ class DashboardController extends Controller
     public function index()
     {
 
-        $terkonfirmasi = User::where('status','terkonfirmasi')->get()->count();
-        $tertolak = User::where('status','tertolak')->get()->count();
-
-        $jumlahAsesi = $terkonfirmasi+$tertolak;
-
         
 
         // dd($tertolak);
 
-        return view('dashboard.index',compact('terkonfirmasi','tertolak','jumlahAsesi'));
+        return view('dashboard.index');
     }
 
     /**

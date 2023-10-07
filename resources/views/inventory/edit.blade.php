@@ -11,7 +11,7 @@
         <!-- Form controls -->
         <div class="col-md-12">
             <div class="card mb-4">
-                <h5 class="card-header">Edit Data user</h5>
+                <h5 class="card-header">Edit Data Inventory</h5>
                 <div class="card-body">
                     <form action="{{ route('inventory.update', $inventory->id) }}" method="POST">
                         @csrf

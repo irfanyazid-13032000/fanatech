@@ -47,19 +47,19 @@
     <div class="card custom-card">
         <i class="fas fa-check-circle"></i> <!-- Ikon centang -->
         <h1>Terkonfirmasi</h1>
-        <p>{{$terkonfirmasi}}</p>
+        <p>{{6}}</p>
     </div>
 
     <div class="card custom-card">
     <i class="fas fa-times-circle"></i> <!-- Ikon silang -->
         <h1>Tertolak</h1>
-        <p>{{$tertolak}}</p>
+        <p>{{9}}</p>
     </div>
 
     <div class="card custom-card">
     <i class="fas fa-file-alt"></i> <!-- Ikon document -->
         <h1>Jumlah Asesi</h1>
-        <p>{{ $jumlahAsesi }}</p>
+        <p>{{ 10 }}</p>
     </div>
 </div>
 
@@ -72,56 +72,16 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
-<script>
-    // Konfigurasi data dan dataset
-    // function getMonths(count) {
-    //     const months = [
-    //         'January', 'February', 'March', 'April', 'May', 'June',
-    //         'July', 'August', 'September', 'October', 'November', 'December'
-    //     ];
-
-    //     return months.slice(0, count);
-    // }
-
-    // const data = {
-    //     labels: getMonths(7),
-    //     datasets: [{
-    //             label: 'ditolak',
-    //             data: [2, 3, 6, 3, 3, 3, 3],
-    //             fill: false,
-    //             borderColor: 'rgb(75, 192, 192)',
-    //             tension: 0.1
-    //         },
-    //         {
-    //             label: 'diterima',
-    //             data: [3, 2, 4, 5, 2, 2, 6],
-    //             fill: false,
-    //             borderColor: 'rgb(44, 56, 65)',
-    //             tension: 0.1
-    //         }
-    //     ]
-    // };
-
-    // // Membuat grafik menggunakan Chart.js
-    // const ctx = document.getElementById('myChart').getContext('2d');
-    // const myChart = new Chart(ctx, {
-    //     type: 'line', // Anda bisa mengubah tipe grafik sesuai kebutuhan (line, bar, pie, dll.)
-    //     data: data,
-    //     options: {
-    //         responsive: true,
-    //         maintainAspectRatio: false,
-    //         // Tambahkan opsi tambahan sesuai kebutuhan
-    //     }
-    // });
-</script>
 
 
 <div class="card">
-        <h6 class="text-center mt-2">Rekapitulasi Status Pendaftaran</h6>
+        <h6 class="text-center mt-2">Rekapitulasi </h6>
         <div class="chart-container">
         <canvas id="jenjang_pendidikan"></canvas>
       </div>
     </div>
+
+
       <script>
        
 
@@ -132,7 +92,7 @@
             labels: ['Tertolak','Terkonfirmasi','Jumlah Asesi'],
             datasets: [{
               label: '%',
-              data: [{{ $tertolak }}, {{ $terkonfirmasi }},{{ $jumlahAsesi }}],
+              data: [{{ 4 }}, {{ 9 }},{{ 7 }}],
               backgroundColor: ['black','orange','blue'],
 
             }],
