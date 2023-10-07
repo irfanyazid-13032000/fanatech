@@ -12,6 +12,7 @@ use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\FillPDFController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LampiranController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\UndanganController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatatableController;
@@ -60,6 +61,12 @@ Route::get('/sales/{id}/detail', [SaleController::class, 'show'])->name('sale.de
 Route::get('/sales/table-awal/{i}', [SaleController::class, 'tableAwal'])->name('sale.table.awal')->middleware('admin');
 Route::get('/sales/table-tambahan/{i}', [SaleController::class, 'tableTambahan'])->name('sale.table.tambahan')->middleware('admin');
 
+
+Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase.index')->middleware('admin');
+Route::get('/purchase/create', [PurchaseController::class, 'create'])->name('purchase.create')->middleware('admin');
+Route::post('/purchase/store', [PurchaseController::class, 'store'])->name('purchase.store')->middleware('admin');
+Route::get('/purchase/table-awal/{i}', [PurchaseController::class, 'tableAwal'])->name('purchase.table.awal')->middleware('admin');
+Route::get('/purchase/table-tambahan/{i}', [PurchaseController::class, 'tableTambahan'])->name('purchase.table.tambahan')->middleware('admin');
 
 // datatable TKK
 Route::get('/data-skk', [DatatableController::class, 'dataSKK'])->name('data-skk');
