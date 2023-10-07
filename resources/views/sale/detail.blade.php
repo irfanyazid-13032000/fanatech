@@ -45,13 +45,23 @@
     var dataTable = $('#table').DataTable({
         dom: 'Bfrtip',
         buttons: [
-            'excelHtml5',
-            'csvHtml5',
             {
               extend:'pdfHtml5',
               exportOptions: {
                 columns: [1, 2, 3],
-            }
+            },
+          },
+            {
+              extend:'csvHtml5',
+              exportOptions: {
+                columns: [1, 2, 3],
+            },
+          },
+            {
+              extend:'excelHtml5',
+              exportOptions: {
+                columns: [1, 2, 3],
+            },
           }
         ],
         processing: true,
