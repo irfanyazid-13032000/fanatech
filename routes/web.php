@@ -50,6 +50,7 @@ Route::get('/inventory/create', [InventoryController::class, 'create'])->name('i
 Route::post('/inventory/store', [InventoryController::class, 'store'])->name('inventory.store')->middleware('admin');
 Route::get('/inventory/{id}/edit', [InventoryController::class, 'edit'])->name('inventory.edit')->middleware('admin');
 Route::get('/inventory/{id}/delete', [InventoryController::class, 'destroy'])->name('inventory.delete')->middleware('admin');
+Route::post('/inventory/{id}/update', [InventoryController::class, 'update'])->name('inventory.update')->middleware('admin');
 
 Route::get('/sales', [SaleController::class, 'index'])->name('sale.index')->middleware('admin');
 Route::get('/sales/create', [SaleController::class, 'create'])->name('sale.create')->middleware('admin');

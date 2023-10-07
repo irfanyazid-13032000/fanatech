@@ -56,7 +56,8 @@ class InventoryController extends Controller
      */
     public function edit(string $id)
     {
-        return $id;
+        $inventory = Inventory::find($id);
+        return view('inventory.edit',compact('inventory'));
     }
 
     /**
@@ -64,7 +65,16 @@ class InventoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Inventory::where('id',$id)->update([
+            'code'=>$request->code,
+            'name'=>$request->name,
+            'price'=>$request->price,
+            'stock'=>$request->stock,
+        ]);
+
+        Alert::success('berhasil mengubah data!!','redirect ke halaman inventory index...');
+
+        return redirect()->route('inventory.index');
     }
 
     /**

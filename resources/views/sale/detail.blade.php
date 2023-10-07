@@ -50,7 +50,7 @@
             {
               extend:'pdfHtml5',
               exportOptions: {
-                columns: [1, 2, 3], // Indeks kolom yang ingin diekspor
+                columns: [1, 2, 3],
             }
           }
         ],
