@@ -24,6 +24,16 @@ class DatatableController extends Controller
 
         return datatables()->of($saleDetails)->toJson();
     }
+
+    public function dataPurchase($id)
+    {
+        $purchaseDetails = DB::table('purchases_details')->where('purchase_id',$id)
+                                    ->join('inventories','purchases_details.inventory_id','=','inventories.id')
+                                    ->select('purchases_details.*','inventories.name')
+                                    ->get();
+
+        return datatables()->of($purchaseDetails)->toJson();
+    }
     
     
     public function dataPelatihan()

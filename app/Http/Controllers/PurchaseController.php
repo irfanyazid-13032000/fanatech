@@ -27,6 +27,7 @@ class PurchaseController extends Controller
     {
         $purchases = Purchase::all();
         $lastId = Purchase::orderBy('id','desc')->first();
+        // dd($lastId);
         return view('purchase.create',compact('purchases','lastId'));
     }
 
@@ -78,7 +79,7 @@ class PurchaseController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('purchase.detail',compact('id'));
     }
 
     /**
@@ -102,6 +103,12 @@ class PurchaseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Purchase::find($id)->delete();
+
+        DB::table('purchases_details')->where('purchase_id',$id)->delete();
+
+        Alert::success("berhasil menghapus data","redirect ke halaman purchase index");
+
+        return redirect()->route('purchase.index');
     }
 }

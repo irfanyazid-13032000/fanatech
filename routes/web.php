@@ -65,12 +65,15 @@ Route::get('/sales/table-tambahan/{i}', [SaleController::class, 'tableTambahan']
 Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase.index')->middleware('admin');
 Route::get('/purchase/create', [PurchaseController::class, 'create'])->name('purchase.create')->middleware('admin');
 Route::post('/purchase/store', [PurchaseController::class, 'store'])->name('purchase.store')->middleware('admin');
+Route::get('/purchase/{id}/detail', [PurchaseController::class, 'show'])->name('purchase.detail')->middleware('admin');
+Route::get('/purchase/{id}/delete', [PurchaseController::class, 'destroy'])->name('purchase.delete')->middleware('admin');
 Route::get('/purchase/table-awal/{i}', [PurchaseController::class, 'tableAwal'])->name('purchase.table.awal')->middleware('admin');
 Route::get('/purchase/table-tambahan/{i}', [PurchaseController::class, 'tableTambahan'])->name('purchase.table.tambahan')->middleware('admin');
 
 // datatable TKK
 Route::get('/data-skk', [DatatableController::class, 'dataSKK'])->name('data-skk');
 Route::get('/data-sale/{id}', [DatatableController::class, 'dataSale'])->name('data-sale');
+Route::get('/data-purchase/{id}', [DatatableController::class, 'dataPurchase'])->name('data-purchase');
 Route::get('/data-inventory', [DatatableController::class, 'dataInventory'])->name('data-inventory');
 Route::get('/data-pelatihan', [DatatableController::class, 'dataPelatihan'])->name('data-pelatihan');
 Route::get('/data-pendidikan', [DatatableController::class, 'dataPendidikan'])->name('data-pendidikan');

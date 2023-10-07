@@ -27,8 +27,8 @@ class PurchaseDataTable extends DataTable
             $deleteClass = "btn btn-danger";
 
 
-            $detailUrl = route('sale.detail', ['id' => $row->id]);
-            $deleteUrl = route('sale.delete', ['id' => $row->id]);
+            $detailUrl = route('purchase.detail', ['id' => $row->id]);
+            $deleteUrl = route('purchase.delete', ['id' => $row->id]);
 
 
             $detailLink = "<a href=\"$detailUrl\" class=\"$detailClass\">detail</a>" ;

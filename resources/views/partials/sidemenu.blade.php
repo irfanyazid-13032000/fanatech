@@ -56,6 +56,27 @@
                    
                 </ul>
             </li>
+
+
+
+            <li
+                class="menu-item {{ Route::is('purchase.*') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bxs-user-check"></i>
+                    <div data-i18n="Layouts">Purchase </div>
+                </a>
+
+                <ul class="menu-sub">
+                   
+                        <li class="menu-item {{ Route::is('purchase.*') ? 'active' : '' }}">
+                            <a href="{{ route('purchase.index') }}" class="menu-link active">
+                                <div>Purchase</div>
+                            </a>
+                        </li>
+                      
+                   
+                </ul>
+            </li>
         
 
         <li
