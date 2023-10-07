@@ -78,7 +78,7 @@ class SaleController extends Controller
      */
     public function show(string $id)
     {
-        return $id;
+        return view('sale.detail',compact('id'));
     }
 
     /**

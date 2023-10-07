@@ -62,6 +62,7 @@ Route::get('/sales/table-tambahan/{i}', [SaleController::class, 'tableTambahan']
 
 // datatable TKK
 Route::get('/data-skk', [DatatableController::class, 'dataSKK'])->name('data-skk');
+Route::get('/data-sale/{id}', [DatatableController::class, 'dataSale'])->name('data-sale');
 Route::get('/data-inventory', [DatatableController::class, 'dataInventory'])->name('data-inventory');
 Route::get('/data-pelatihan', [DatatableController::class, 'dataPelatihan'])->name('data-pelatihan');
 Route::get('/data-pendidikan', [DatatableController::class, 'dataPendidikan'])->name('data-pendidikan');
